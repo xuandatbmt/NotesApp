@@ -49,9 +49,6 @@ class _UserProfilePage extends State<UserProfile> {
             Navigator.pop(context);
           },
         ),
-        //  actions: <Widget>[
-        //               child:Text("Dang xuat"),
-        //             ],
       ),
       body: Stack(
         alignment: Alignment.center,

@@ -3,9 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:notes/models/global.dart';
 import 'package:notes/models/notes_model.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:notes/models/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Data extends ChangeNotifier {
@@ -14,6 +13,12 @@ class Data extends ChangeNotifier {
   Future<String> getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('token');
+  }
+
+  Future<bool> removeToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final key = "token";
+    return prefs.remove(key);
   }
 
   //lấy tất cả list note
@@ -42,27 +47,26 @@ class Data extends ChangeNotifier {
   // thêm note
   // String hours = now.hour < 10 ? '0${now.hour}' : '${now.hour}';
   //   String minutes = now.minute < 10 ? '0${now.minute}' : '${now.minute}';
-  // Future<List<Notes>> addNote(http.Client client) async {
-  //   String token = await Data().getToken();
-  //   final respone = await client.post(URL_API + '/note', headers: {
-  //     'Content-Type': 'application/json; charset=UTF-8',
-  //     'Authorization': 'Bearer $token',
-  //   });
-  //   if (respone.statusCode == 200) {
-  //     Map<String, dynamic> mapRespone = json.decode(respone.body);
-  //     if (mapRespone["status"] == "ok") {
-  //       final notes = mapRespone["data"].cast<Map<String, dynamic>>();
-  //       final listNotes = await notes.map<Notes>((json) {
-  //         return Notes.fromJson(json);
-  //       }).toList();
-  //       return listNotes;
-  //     } else {
-  //       return [];
-  //     }
-  //   } else {
-  //     throw Exception('Fail to load Notes form the Internet');
-  //   }
-  // }
+  Future<bool> addNote(http.Client client, Map<String, dynamic> params) async {
+    String token = await Data().getToken();
+    final respone = await client.post(URL_API + '/note',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+        body: params);
+    if (respone.statusCode == 200) {
+      final mapRespone = await json.decode(respone.body);
+      if (mapRespone["status"] == "ok") {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      throw Exception('Fail to add Notes');
+    }
+  }
+
   // update note
   Future<Notes> updateNote(
       http.Client client, Map<String, dynamic> params) async {
@@ -77,7 +81,7 @@ class Data extends ChangeNotifier {
       final responeBody = await json.decode(respone.body);
       return Notes.fromJson(responeBody);
     } else {
-      throw Exception('Fail to load Notes form the Internet');
+      throw Exception('Fail to update Notes ');
     }
   }
 
@@ -97,7 +101,7 @@ class Data extends ChangeNotifier {
         return Notes();
       }
     } else {
-      throw Exception('Fail to load Notes form the Internet');
+      throw Exception('Fail to load NoteID form the Internet');
     }
   }
 
@@ -112,7 +116,46 @@ class Data extends ChangeNotifier {
       final responeBody = await json.decode(respone.body);
       return Notes.fromJson(responeBody);
     } else {
-      throw Exception('Fail to load Notes form the Internet');
+      throw Exception('Fail to delete Note');
+    }
+  }
+
+  //Profile user
+  //get profile
+  Future<ProfileModel> getProfile(http.Client client) async {
+    String token = await Data().getToken();
+    final respone = await client.get(URL_API + '/userinfo/', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
+    });
+    if (respone.statusCode == 200) {
+      Map<String, dynamic> mapRespone = json.decode(respone.body);
+      if (mapRespone["status"] == "ok") {
+        Map<String, dynamic> mapProfile = mapRespone["data"];
+        return ProfileModel.fromJson(mapProfile);
+      } else {
+        return ProfileModel();
+      }
+    } else {
+      throw Exception('Fail to get Profile form the Internet');
+    }
+  }
+
+  //update profile
+  Future<ProfileModel> updateProfile(
+      http.Client client, Map<String, dynamic> params) async {
+    String token = await Data().getToken();
+    final respone = await client.post(URL_API + '/updateuserinfo/',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+        body: params);
+    if (respone.statusCode == 200) {
+      final responeBody = await json.decode(respone.body);
+      return ProfileModel.fromJson(responeBody);
+    } else {
+      throw Exception('Fail to update Notes ');
     }
   }
 }

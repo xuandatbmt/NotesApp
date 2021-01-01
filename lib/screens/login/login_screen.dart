@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String _password;
   bool isHidden = true;
   String token;
-  bool _isLoading = false;
+ // bool _isLoading = false;
   _saveToken(String token) async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'token';
@@ -42,12 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
     prefs.setString(key, value);
   }
 
-  _readToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'token';
-    final value = prefs.get(key) ?? 0;
-    print('read : $value');
-  }
+  // _readToken() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final key = 'token';
+  //   final value = prefs.get(key) ?? 0;
+  //   print('read : $value');
+  // }
 
   Future<UserModel> loginUser() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

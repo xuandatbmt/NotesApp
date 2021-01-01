@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes/models/notes_model.dart';
-import 'package:notes/screens/add_note/components/text_field.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
-import 'components/text_field.dart';
+
 import 'package:http/http.dart' as http;
 
 class EditNoteScreen extends StatefulWidget {
@@ -73,6 +72,7 @@ class _EditNoteState extends State<EditNote> {
                 params["id"] = this.notes.id.toString();
                 params["title"] = this.notes.title.toString();
                 params["body"] = this.notes.body.toString();
+                params["updated_at"] = DateTime.now().toString();
                 // params["title"] = this.notes[index].title.toString();
                 if (notes.title != '' && notes.body != '') {
                   await data.updateNote(http.Client(), params);

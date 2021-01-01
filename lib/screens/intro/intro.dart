@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:notes/screens/home/home.dart';
 import 'package:notes/services/shared_pref.dart';
 import 'package:provider/provider.dart';
-import '../../services/data.dart';
-import '../home/home.dart';
+
 
 class SplashScreen extends StatefulWidget {
   @override

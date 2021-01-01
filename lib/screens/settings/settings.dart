@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:notes/services/data.dart';
 import 'package:notes/services/shared_pref.dart';
 import 'package:notes/widgets/custom_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';

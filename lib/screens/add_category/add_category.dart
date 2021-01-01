@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notes/services/data.dart';
+import 'package:notes/screens/add_note/components/text_field.dart';
 import 'package:notes/widgets/custom_appbar.dart';
-import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'components/text_field.dart';
 
 class AddCategorycreen extends StatelessWidget {
   @override

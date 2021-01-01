@@ -3,25 +3,17 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:notes/screens/add_category/add_category.dart';
 import 'package:notes/screens/add_note/add_note.dart';
 import 'package:notes/screens/add_prioty/add_prioty.dart';
-import 'package:notes/screens/menu/draw_menu.dart';
+import 'package:notes/screens/home/components/list_view.dart';
 import 'package:notes/services/data.dart';
-import 'components/list_view.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
-class HomeScreen extends StatefulWidget {
+class CategoryScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _CategoryScreenState createState() => _CategoryScreenState();
 }
 
-var _scaffoldKey = new GlobalKey<ScaffoldState>();
-
-class _HomeScreenState extends State<HomeScreen> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
-
+class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
@@ -30,30 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white10,
         elevation: 0.0,
         title: Text(
-          "Notes Manager",
+          "List Category",
           textAlign: TextAlign.right,
           style: TextStyle(color: Colors.black),
         ),
-        leading: FlatButton(
-            onPressed: () {
-              print("click menu");
-              _scaffoldKey.currentState.openDrawer();
-            },
-            child: Icon(Icons.menu)),
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Icon(Icons.notifications),
-            ),
-          )
-        ],
       ),
-      drawer: Drawer(
-        child: OptionMenu(),
-      ),
-      key: _scaffoldKey,
       body: SafeArea(
         child: FutureBuilder(
           future: data.fetchNotes(http.Client()),

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:notes/screens/login/login.dart';
 import 'package:notes/screens/menu/about.dart';
-import 'package:notes/screens/menu/notify.dart';
 import 'package:notes/screens/menu/rate_and_review.dart';
+import 'package:notes/screens/menu/show_category.dart';
+import 'package:notes/screens/menu/show_prioty.dart';
+import 'package:notes/screens/menu/show_status.dart';
 import 'package:notes/screens/menu/user_info.dart';
 import 'package:notes/screens/settings/settings.dart';
+import 'package:notes/services/data.dart';
 
 class OptionMenu extends StatefulWidget {
   @override
@@ -70,21 +74,6 @@ class _OptionMenuState extends State<OptionMenu> {
             ),
             new Divider(),
             ListTile(
-              leading: Icon(Icons.circle_notifications),
-              title: Text(
-                'Notify',
-                style: TextStyle(fontSize: 18),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Notify(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
               leading: Icon(Icons.settings),
               title: Text(
                 'Setting',
@@ -107,7 +96,27 @@ class _OptionMenuState extends State<OptionMenu> {
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                //  Navigator.pushNamed(context, '/settings');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CategoryScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.circle_notifications),
+              title: Text(
+                'Status',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StatusScreen(),
+                  ),
+                );
               },
             ),
             ListTile(
@@ -117,7 +126,12 @@ class _OptionMenuState extends State<OptionMenu> {
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                //  Navigator.pushNamed(context, '/settings');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PriotyScreen(),
+                  ),
+                );
               },
             ),
             ListTile(
@@ -127,7 +141,12 @@ class _OptionMenuState extends State<OptionMenu> {
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
-                //  Navigator.pushNamed(context, '/settings');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RateandReview(),
+                  ),
+                );
               },
             ),
             new Divider(),
@@ -177,7 +196,14 @@ class _OptionMenuState extends State<OptionMenu> {
                 'Logout',
                 style: TextStyle(fontSize: 18),
               ),
-              onTap: () {},
+              onTap: () {
+                Data().removeToken();
+                //commit();
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => Login()),
+                    (Route<dynamic> route) => false);
+              },
             ),
           ],
         ),
@@ -185,3 +211,5 @@ class _OptionMenuState extends State<OptionMenu> {
     );
   }
 }
+
+class PriorityScreen {}
