@@ -14,7 +14,10 @@ import 'package:notes/components/text_forgot_pass.dart';
 import 'package:notes/models/user_model.dart';
 import 'package:notes/screens/forgot_password.dart/forgot_screen.dart';
 import 'package:notes/screens/home/home.dart';
+import 'package:notes/screens/login/login_facebook.dart';
+import 'package:notes/screens/login/login_google.dart';
 import 'package:notes/screens/signup/signup.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -189,11 +192,25 @@ class _LoginScreenState extends State<LoginScreen> {
               children: <Widget>[
                 SocalIcon(
                   iconSrc: "assets/icons/facebook.svg",
-                  press: () {},
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return LoginWithFacebook();
+                          //test
+                        },
+                      ),
+                    );
+                  },
                 ),
                 SocalIcon(
                   iconSrc: "assets/icons/google.svg",
-                  press: () {},
+                  press: () {
+                    final provider = Provider.of<GoogleSignInProvider>(context,
+                        listen: false);
+                    provider.login();
+                  },
                 ),
               ],
             )

@@ -19,12 +19,12 @@ class AddingTextField extends StatelessWidget {
         maxLines: maxLines,
         decoration: InputDecoration(hintText: hintText),
         onChanged: (input) {
-          if(input != null) {
-            if(hintText == 'Title')
-              data.addTitle(input);
-            else
-              data.addContent(input);
-          }
+          // if(input != null) {
+          //   if(hintText == 'Title')
+          //     data.addTitle(input);
+          //   else
+          //     data.addContent(input);
+          // }
         },
       ),
     );

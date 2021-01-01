@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:notes/screens/login/login.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/services/shared_pref.dart';
 import 'package:provider/provider.dart';
@@ -6,17 +9,21 @@ import 'screens/intro/intro.dart';
 import 'themes/dark_theme.dart';
 import 'themes/light_theme.dart';
 
-void main() => runApp(
-      MultiProvider(
-        child: MyApp(),
-        providers: [
-          ChangeNotifierProvider(create: (context) => Data()),
-          ChangeNotifierProvider(
-            create: (context) => SharedPref(),
-          ),
-        ],
-      ),
-    );
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(
+    MultiProvider(
+      child: MyApp(),
+      providers: [
+        ChangeNotifierProvider(create: (context) => Data()),
+        ChangeNotifierProvider(
+          create: (context) => SharedPref(),
+        ),
+      ],
+    ),
+  );
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -25,7 +32,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'Notes Management',
-      home: SplashScreen(),
+      home: Login(),
       theme: data.isNight ? darkTheme : lightTheme,
       debugShowCheckedModeBanner: false,
       // routes: <String,WidgetBuilder>{

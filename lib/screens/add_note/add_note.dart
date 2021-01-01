@@ -21,10 +21,10 @@ class AddNoteScreen extends StatelessWidget {
               title: 'Add Note',
               icon: FontAwesomeIcons.solidSave,
               onPressed: () {
-                if (data.title != '' && data.content != '') {
-                  data.addNote();
-                  Navigator.pop(context);
-                }
+                // if (data.title != '' && data.content != '') {
+                  // data.addNote();
+                //   Navigator.pop(context);
+                // }
               },
             ),
             AddingTextField(maxLines: 1, hintText: 'Title'),

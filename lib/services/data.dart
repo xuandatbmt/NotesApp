@@ -1,78 +1,118 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:notes/models/global.dart';
+import 'package:notes/models/notes_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Data extends ChangeNotifier {
-  String title = '';
-  String content = '';
-  Map<String, List<String>> notes = {
-    'titles': [],
-    'contents': [],
-    'timeSnapShots': [],
-  };
+  List<Notes> notes;
 
-  void addTitle(String value) => title = value;
-
-  void addContent(String value) => content = value;
-
-  /// Create a new note by the given title and content.
-  void addNote() {
-    var now = DateTime.now();
-    String hours = now.hour < 10 ? '0${now.hour}' : '${now.hour}';
-    String minutes = now.minute < 10 ? '0${now.minute}' : '${now.minute}';
-
-    String currentTime = '$hours:$minutes';
-
-    notes['titles'].add(title);
-    notes['contents'].add(content);
-    notes['timeSnapShots'].add(currentTime);
-    title = content = '';
-    notifyListeners();
-    writeFile();
+  Future<String> getToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token');
   }
 
-  void removeNote(int index) {
-    notes['titles'].remove(notes['titles'][index]);
-    notes['contents'].remove(notes['contents'][index]);
-    notes['timeSnapShots'].remove(notes['timeSnapShots'][index]);
-    notifyListeners();
-    writeFile();
+  //lấy tất cả list note
+  Future<List<Notes>> fetchNotes(http.Client client) async {
+    String token = await Data().getToken();
+    final respone = await client.get(URL_API + '/notes', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
+    });
+    if (respone.statusCode == 200) {
+      Map<String, dynamic> mapRespone = json.decode(respone.body);
+      if (mapRespone["status"] == "ok") {
+        final notes = mapRespone["data"].cast<Map<String, dynamic>>();
+        final listNotes = await notes.map<Notes>((json) {
+          return Notes.fromJson(json);
+        }).toList();
+        return listNotes;
+      } else {
+        return [];
+      }
+    } else {
+      throw Exception('Fail to load Notes form the Internet');
+    }
   }
 
-  Future<String> appPath() async {
-    final document = await getApplicationDocumentsDirectory();
-    return document.path;
+  // thêm note
+  // String hours = now.hour < 10 ? '0${now.hour}' : '${now.hour}';
+  //   String minutes = now.minute < 10 ? '0${now.minute}' : '${now.minute}';
+  // Future<List<Notes>> addNote(http.Client client) async {
+  //   String token = await Data().getToken();
+  //   final respone = await client.post(URL_API + '/note', headers: {
+  //     'Content-Type': 'application/json; charset=UTF-8',
+  //     'Authorization': 'Bearer $token',
+  //   });
+  //   if (respone.statusCode == 200) {
+  //     Map<String, dynamic> mapRespone = json.decode(respone.body);
+  //     if (mapRespone["status"] == "ok") {
+  //       final notes = mapRespone["data"].cast<Map<String, dynamic>>();
+  //       final listNotes = await notes.map<Notes>((json) {
+  //         return Notes.fromJson(json);
+  //       }).toList();
+  //       return listNotes;
+  //     } else {
+  //       return [];
+  //     }
+  //   } else {
+  //     throw Exception('Fail to load Notes form the Internet');
+  //   }
+  // }
+  // update note
+  Future<Notes> updateNote(
+      http.Client client, Map<String, dynamic> params) async {
+    String token = await Data().getToken();
+    final respone = await client.put(URL_API + '/note/${params["id"]}',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+        body: params);
+    if (respone.statusCode == 200) {
+      final responeBody = await json.decode(respone.body);
+      return Notes.fromJson(responeBody);
+    } else {
+      throw Exception('Fail to load Notes form the Internet');
+    }
   }
 
-  Future<File> appFile() async {
-    final path = await appPath();
-    return File('$path/data.txt');
+  // lấy note theo id
+  Future<Notes> fetchNoteId(http.Client client, String id) async {
+    String token = await Data().getToken();
+    final respone = await client.get(URL_API + '/note/$id', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
+    });
+    if (respone.statusCode == 200) {
+      Map<String, dynamic> mapRespone = json.decode(respone.body);
+      if (mapRespone["status"] == "ok") {
+        Map<String, dynamic> mapNote = mapRespone["data"];
+        return Notes.fromJson(mapNote);
+      } else {
+        return Notes();
+      }
+    } else {
+      throw Exception('Fail to load Notes form the Internet');
+    }
   }
 
-  Future writeFile() async {
-    final file = await appFile();
-
-    /// The vertical bar help us split data when reading the file
-    Future saveData = file.writeAsString(
-        '${notes['titles']}|${notes['contents']}|${notes['timeSnapShots']}');
-
-    return saveData;
-  }
-
-  Future readFile() async {
-    final file = await appFile();
-
-    List data = (await file.readAsString()).split('|');
-
-    /// I called the (replaceAll) here because when we save list as
-    /// string the '[' and ']' of lists also saved with it.
-    notes['titles'] =
-        data[0].replaceAll('[', '').replaceAll(']', '').split(',');
-    notes['contents'] =
-        data[1].replaceAll('[', '').replaceAll(']', '').split(',');
-    notes['timeSnapShots'] =
-        data[2].replaceAll('[', '').replaceAll(']', '').split(',');
-
-    notifyListeners();
+  // xóa note theo id
+  Future<Notes> deleteNote(http.Client client, String id) async {
+    String token = await Data().getToken();
+    final respone = await client.delete(URL_API + '/note/$id', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
+    });
+    if (respone.statusCode == 200) {
+      final responeBody = await json.decode(respone.body);
+      return Notes.fromJson(responeBody);
+    } else {
+      throw Exception('Fail to load Notes form the Internet');
+    }
   }
 }

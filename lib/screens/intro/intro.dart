@@ -11,7 +11,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   void getDataAndGoHome() async {
-    context.read<Data>().readFile();
+    // context.read<Data>().readFile();
     context.read<SharedPref>().getTheme();
 
     await Future.delayed(Duration(seconds: 2));
