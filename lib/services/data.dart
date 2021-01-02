@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:notes/helper/jwt_decode.dart';
 import 'package:notes/models/global.dart';
 import 'package:notes/models/notes_model.dart';
 import 'package:http/http.dart' as http;
@@ -19,6 +20,14 @@ class Data extends ChangeNotifier {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final key = "token";
     return prefs.remove(key);
+  }
+
+  //
+  //lay thong tin user
+  Future<ProfileModel> decodeToken() async {
+    String token = await Data().getToken();
+    Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+    return ProfileModel.fromJson(decodedToken);
   }
 
   //lấy tất cả list note
@@ -122,20 +131,14 @@ class Data extends ChangeNotifier {
 
   //Profile user
   //get profile
-  Future<ProfileModel> getProfile(http.Client client) async {
+  getProfile(http.Client client) async {
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/userinfo/', headers: {
+    final respone = await client.get(URL_API + '/userinfo', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
-      Map<String, dynamic> mapRespone = json.decode(respone.body);
-      if (mapRespone["status"] == "ok") {
-        Map<String, dynamic> mapProfile = mapRespone["data"];
-        return ProfileModel.fromJson(mapProfile);
-      } else {
-        return ProfileModel();
-      }
+      return json.decode(respone.body);
     } else {
       throw Exception('Fail to get Profile form the Internet');
     }
@@ -145,7 +148,7 @@ class Data extends ChangeNotifier {
   Future<ProfileModel> updateProfile(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final respone = await client.post(URL_API + '/updateuserinfo/',
+    final respone = await client.post(URL_API + '/updateprofile/',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
@@ -158,4 +161,5 @@ class Data extends ChangeNotifier {
       throw Exception('Fail to update Notes ');
     }
   }
+  
 }

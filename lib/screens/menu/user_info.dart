@@ -1,40 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:notes/components/rounded_button.dart';
+import 'package:notes/models/profile.dart';
+import 'package:notes/services/data.dart';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class UserProfile extends StatefulWidget {
-  const UserProfile({
-    Key key,
-  }) : super(key: key);
+  final ProfileModel profileModel;
+  const UserProfile({Key key, this.profileModel}) : super(key: key);
   @override
   _UserProfilePage createState() => _UserProfilePage();
 }
 
 class _UserProfilePage extends State<UserProfile> {
-  Widget textField({@required String hintText}) {
-    return Material(
-      elevation: 4,
-      shadowColor: Colors.grey,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: TextStyle(
-            letterSpacing: 2,
-            color: Colors.black54,
-            fontWeight: FontWeight.bold,
-          ),
-          fillColor: Colors.white30,
-          filled: true,
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide.none),
-        ),
-      ),
-    );
-  }
+  ProfileModel profileModel = new ProfileModel();
+  // Widget textField({@required String hintText}) {
+  //   return Material(
+  //     elevation: 4,
+  //     shadowColor: Colors.grey,
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+  //     child: TextField(
+  //       decoration: InputDecoration(
+  //         hintText: hintText,
+  //         hintStyle: TextStyle(
+  //           letterSpacing: 2,
+  //           color: Colors.black54,
+  //           fontWeight: FontWeight.bold,
+  //         ),
+  //         fillColor: Colors.white30,
+  //         filled: true,
+  //         border: OutlineInputBorder(
+  //             borderRadius: BorderRadius.circular(10),
+  //             borderSide: BorderSide.none),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
+    var data = context.watch<Data>();
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -64,8 +70,6 @@ class _UserProfilePage extends State<UserProfile> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      textField(hintText: 'Your Name'),
-                      textField(hintText: 'Email'),
                       Container(
                         height: 55,
                         width: double.infinity,
@@ -74,7 +78,20 @@ class _UserProfilePage extends State<UserProfile> {
                           child: FlatButton(
                             // padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                             color: Colors.blue,
-                            onPressed: () {},
+                            onPressed: () async {
+                              Map<String, dynamic> params =
+                                  Map<String, dynamic>();
+                              params["displayName"] =
+                                  this.profileModel.displayName.toString();
+                              this.profileModel.toString();
+                              params["email"] =
+                                  this.profileModel.email.toString();
+                              if (profileModel.displayName != '' &&
+                                  profileModel.email != '') {
+                                await data.updateProfile(http.Client(), params);
+                                Navigator.pop(context);
+                              }
+                            },
                             child: Text(
                               "CẬP NHẬT",
                               style:

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes/models/notes_model.dart';
+import 'package:notes/screens/add_note/components/text_field.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
-
 import 'package:http/http.dart' as http;
 
 class EditNoteScreen extends StatefulWidget {
@@ -21,9 +21,6 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Edit Note"),
-        ),
         body: FutureBuilder(
             future: data.fetchNoteId(http.Client(), widget.id),
             builder: (context, snapshot) {
@@ -45,7 +42,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
 class EditNote extends StatefulWidget {
   final Notes notes;
 
-  const EditNote({Key key, this.notes}) : super(key: key);
+  EditNote({Key key, this.notes}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _EditNoteState();
@@ -54,14 +51,18 @@ class EditNote extends StatefulWidget {
 
 class _EditNoteState extends State<EditNote> {
   Notes notes = new Notes();
+  bool isLoadNote = false;
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
-
+    if (isLoadNote == false) {
+      setState(() {
+        this.notes = Notes.fromNote(widget.notes);
+        this.isLoadNote = true;
+      });
+    }
     return Scaffold(
       body: SafeArea(
-          child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
         child: Column(
           children: <Widget>[
             CustomAppBar(
@@ -96,9 +97,15 @@ class _EditNoteState extends State<EditNote> {
                 controller: TextEditingController(text: this.notes.body),
               ),
             ),
+            // TextField(
+            //     maxLines: 50,
+            //     decoration: InputDecoration(hintText: "Cc"),
+            //     controller: TextEditingController(text: this.notes.body),
+            //   ),
+            // ),
           ],
         ),
-      )),
+      ),
     );
   }
 }

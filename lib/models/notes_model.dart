@@ -43,6 +43,17 @@ class Notes {
         priority: json["priority"],
         status: json["status"],
       );
+  factory Notes.fromNote(Notes json) => Notes(
+      id: json.id,
+      uid: json.uid,
+      category: json.category,
+      title: json.title,
+      body: json.body,
+      createdAt: json.category,
+      updatedAt: json.updatedAt,
+      expiresAt: json.expiresAt,
+      priority: json.priority,
+      status: json.status);
 
   Map<String, dynamic> toJson() => {
         "id": id,

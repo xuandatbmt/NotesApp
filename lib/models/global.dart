@@ -12,3 +12,12 @@ const URL_API = 'https://api-mobile-app.herokuapp.com/api';
 // const URL_UPDATE_PROFILE = 'https://api-mobile-app.herokuapp.com/api/updateprofile';
 // const URL_VERY_MAIL = 'https://api-mobile-app.herokuapp.com/api/verifyemail';
 // const URL_CHANGLE_PASS = 'https://api-mobile-app.herokuapp.com/api/changepass';
+
+// router.post("/status", addStatus);
+// router.get("/status", getAllStatus);
+// router.put("/status/:id", updateStatus);
+// router.delete("/status/:id", deleteStatus);
+// router.post("/priority", addPriority);
+// router.get("/priority", getAllPriority);
+// router.put("/priority/:id", updatePriority);
+// router.delete("/priority/:id", deletePriority)

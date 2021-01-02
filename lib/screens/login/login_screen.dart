@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String _password;
   bool isHidden = true;
   String token;
- // bool _isLoading = false;
+  // bool _isLoading = false;
   _saveToken(String token) async {
     final prefs = await SharedPreferences.getInstance();
     final key = 'token';
@@ -133,11 +133,6 @@ class _LoginScreenState extends State<LoginScreen> {
               "LOGIN",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: size.height * 0.03),
-            // SvgPicture.asset(
-            //   "assets/icons/login1.svg",
-            //   height: size.height * 0.35,
-            // ),
             SizedBox(height: size.height * 0.03),
             RoundedInputField(
               hintText: "Your Email",

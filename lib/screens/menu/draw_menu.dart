@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/models/profile.dart';
 import 'package:notes/screens/login/login.dart';
 import 'package:notes/screens/menu/about.dart';
 import 'package:notes/screens/menu/rate_and_review.dart';
@@ -6,8 +7,10 @@ import 'package:notes/screens/menu/show_category.dart';
 import 'package:notes/screens/menu/show_prioty.dart';
 import 'package:notes/screens/menu/show_status.dart';
 import 'package:notes/screens/menu/user_info.dart';
+import 'package:notes/screens/read_note/components/text_field.dart';
 import 'package:notes/screens/settings/settings.dart';
 import 'package:notes/services/data.dart';
+import 'package:http/http.dart' as http;
 
 class OptionMenu extends StatefulWidget {
   @override
@@ -15,6 +18,22 @@ class OptionMenu extends StatefulWidget {
 }
 
 class _OptionMenuState extends State<OptionMenu> {
+  ProfileModel profileModel = new ProfileModel();
+  // bool cirucular = true;
+  @override
+  void initState() {
+    super.initState();
+    // fetchUser();
+  }
+
+  // void fetchUser() async {
+  //   var response = Data().getProfile(http.Client());
+  //   setState(() {
+  //     profileModel = ProfileModel.fromJson(response);
+  //     cirucular = false;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -51,23 +70,25 @@ class _OptionMenuState extends State<OptionMenu> {
                         )),
                       ),
                     ),
-                    // Container(
-                    //   width: 150,
-                    //   height: 50,
-                    //   margin: EdgeInsets.only(top: 30, bottom: 5),
-                    //   child: ClipRRect(
-                    //     borderRadius: BorderRadius.circular(20),
-                    //     child: FlatButton(
-                    //       // padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                    //       color: Colors.white,
-                    //       onPressed: () {},
-                    //       child: Text(
-                    //         "Đăng xuất",
-                    //         style: TextStyle(fontSize: 20, color: Colors.black),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                    Container(
+                      width: 150,
+                      height: 50,
+                      margin: EdgeInsets.only(top: 30, bottom: 5),
+                      child: Column(
+                        children: <Widget>[
+                          ReadingTextField(
+                            text: profileModel.displayName,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 5,
+                          ),
+                          ReadingTextField(
+                            text: profileModel.email,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 5,
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
