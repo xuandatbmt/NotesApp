@@ -41,7 +41,7 @@ class _OptionMenuState extends State<OptionMenu> {
         child: Column(
           children: <Widget>[
             Container(
-              //width: double.infinity,
+              width: double.infinity,
               padding: EdgeInsets.all(20),
               color: Colors.blue[500],
               child: Center(
@@ -53,7 +53,7 @@ class _OptionMenuState extends State<OptionMenu> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => UserProfile(),
+                            builder: (context) => UserProfileScreen(),
                           ),
                         );
                       },

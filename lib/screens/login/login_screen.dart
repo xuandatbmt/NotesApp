@@ -65,26 +65,17 @@ class _LoginScreenState extends State<LoginScreen> {
         .catchError((e) {
       throw (e);
     });
-    // print(response.body);
-
     if (response.statusCode == 200) {
       showToast("Login succesful");
       var data = json.decode(response.body);
       if (data['refreshToken'] != null) {
         _saveToken(data['refreshToken']);
-        // setState(() {
-        //   _isLoading = false;
-        // });
         token = sharedPreferences.getString("token");
         await sharedPreferences.setString("token", data['refreshToken']);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
             (Route<dynamic> route) => false);
       }
-      // setState(() {
-      //   login = true;
-      //   _isLoading = false;
-      // });
       return userModelFromJson(response.body);
     } else {
       setState(() {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes/config/constants.dart';
 import 'package:notes/models/notes_model.dart';
+import 'package:notes/screens/add_note/add_note.dart';
 import 'package:notes/screens/add_note/components/text_field.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/widgets/custom_appbar.dart';
@@ -52,6 +54,7 @@ class EditNote extends StatefulWidget {
 class _EditNoteState extends State<EditNote> {
   Notes notes = new Notes();
   bool isLoadNote = false;
+  DateTime _dateTime;
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
@@ -70,10 +73,9 @@ class _EditNoteState extends State<EditNote> {
               icon: FontAwesomeIcons.solidSave,
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
-                params["id"] = this.notes.id.toString();
+                params["id"] = this.widget.notes.id;
                 params["title"] = this.notes.title.toString();
                 params["body"] = this.notes.body.toString();
-                params["updated_at"] = DateTime.now().toString();
                 // params["title"] = this.notes[index].title.toString();
                 if (notes.title != '' && notes.body != '') {
                   await data.updateNote(http.Client(), params);
@@ -85,24 +87,77 @@ class _EditNoteState extends State<EditNote> {
               padding: const EdgeInsets.all(15),
               child: TextField(
                 maxLines: 1,
-                decoration: InputDecoration(hintText: "Cc"),
+                autocorrect: false,
+                decoration: InputDecoration(hintText: "Title"),
                 controller: TextEditingController(text: this.notes.title),
+                onChanged: (text) {
+                  setState(() {
+                    this.notes.title = text;
+                  });
+                },
               ),
             ),
             //AddingTextField(maxLines: 1, hintText: 'Title'),
             Flexible(
-              child: TextField(
-                maxLines: 50,
-                decoration: InputDecoration(hintText: "Cc"),
-                controller: TextEditingController(text: this.notes.body),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: TextField(
+                  maxLines: 50,
+                  autocorrect: false,
+                  decoration: InputDecoration(hintText: "Content"),
+                  controller: TextEditingController(text: this.notes.body),
+                  onChanged: (text) {
+                    setState(() {
+                      this.notes.body = text;
+                    });
+                  },
+                ),
               ),
             ),
-            // TextField(
-            //     maxLines: 50,
-            //     decoration: InputDecoration(hintText: "Cc"),
-            //     controller: TextEditingController(text: this.notes.body),
-            //   ),
-            // ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 15, 15, 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.category),
+                      onPressed: () {
+                        showCategories(context);
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.calendar_today,
+                      ),
+                      onPressed: () {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1970),
+                          lastDate: DateTime(2030),
+                        ).then((date) => _dateTime = date);
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.playlist_add_check),
+                      color: mainAccentColor,
+                      onPressed: () {
+                        showStatus(context);
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.label_outline),
+                      color: mainAccentColor,
+                      onPressed: () {
+                        showPrioty(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

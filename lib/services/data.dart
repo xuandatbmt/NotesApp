@@ -131,14 +131,15 @@ class Data extends ChangeNotifier {
 
   //Profile user
   //get profile
-  getProfile(http.Client client) async {
+  Future<ProfileModel> getProfile(http.Client client) async {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/userinfo', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': '$token',
     });
     if (respone.statusCode == 200) {
-      return json.decode(respone.body);
+      final responeBody = await json.decode(respone.body);
+      return ProfileModel.fromJson(responeBody);
     } else {
       throw Exception('Fail to get Profile form the Internet');
     }
@@ -161,5 +162,4 @@ class Data extends ChangeNotifier {
       throw Exception('Fail to update Notes ');
     }
   }
-  
 }

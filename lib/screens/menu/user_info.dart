@@ -1,9 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:notes/components/rounded_button.dart';
 import 'package:notes/models/profile.dart';
 import 'package:notes/services/data.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+
+class UserProfileScreen extends StatefulWidget {
+  final ProfileModel profileModel;
+  UserProfileScreen({Key key, this.profileModel}) : super(key: key);
+  @override
+  State<StatefulWidget> createState() {
+    return _UserProfileScreenState();
+  }
+}
+
+class _UserProfileScreenState extends State<UserProfileScreen> {
+  @override
+  Widget build(BuildContext context) {
+    var data = context.watch<Data>();
+    return Scaffold(
+        body: FutureBuilder(
+            future: data.getProfile(http.Client()),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(snapshot.error.toString()),
+                );
+              } else if (snapshot.connectionState == ConnectionState.done) {
+                return UserProfile(profileModel: snapshot.data);
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }));
+  }
+}
 
 class UserProfile extends StatefulWidget {
   final ProfileModel profileModel;
@@ -13,40 +44,16 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfilePage extends State<UserProfile> {
-  ProfileModel profileModel = new ProfileModel();
-  // Widget textField({@required String hintText}) {
-  //   return Material(
-  //     elevation: 4,
-  //     shadowColor: Colors.grey,
-  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-  //     child: TextField(
-  //       decoration: InputDecoration(
-  //         hintText: hintText,
-  //         hintStyle: TextStyle(
-  //           letterSpacing: 2,
-  //           color: Colors.black54,
-  //           fontWeight: FontWeight.bold,
-  //         ),
-  //         fillColor: Colors.white30,
-  //         filled: true,
-  //         border: OutlineInputBorder(
-  //             borderRadius: BorderRadius.circular(10),
-  //             borderSide: BorderSide.none),
-  //       ),
-  //     ),
-  //   );
-  // }
-
+  ProfileModel profileModel;
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
-
+    setState(() {
+      this.profileModel = ProfileModel.fromModel(widget.profileModel);
+    });
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        // PreferredSize(
-        // preferredSize: Size.fromHeight(120.0),
-        //   child: (
         elevation: 0.0,
         backgroundColor: Colors.blue[200],
         leading: IconButton(
@@ -56,8 +63,8 @@ class _UserProfilePage extends State<UserProfile> {
           },
         ),
       ),
-      body: Stack(
-        alignment: Alignment.center,
+      body: Column(
+        //  / alignment: AlignmentDirectional.center,
         children: <Widget>[
           SingleChildScrollView(
             child: Column(
@@ -70,6 +77,36 @@ class _UserProfilePage extends State<UserProfile> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: TextField(
+                          maxLines: 1,
+                          decoration: InputDecoration(hintText: "Email"),
+                          autocorrect: false,
+                          controller: TextEditingController(
+                              text: this.profileModel.email),
+                          onChanged: (text) {
+                            setState(() {
+                              this.profileModel.email = text;
+                            });
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: TextField(
+                          maxLines: 1,
+                          autocorrect: false,
+                          decoration: InputDecoration(hintText: "DisplayName"),
+                          controller: TextEditingController(
+                              text: this.profileModel.displayName),
+                          onChanged: (text) {
+                            setState(() {
+                              this.profileModel.displayName = text;
+                            });
+                          },
+                        ),
+                      ),
                       Container(
                         height: 55,
                         width: double.infinity,
@@ -106,61 +143,57 @@ class _UserProfilePage extends State<UserProfile> {
               ],
             ),
           ),
-          CustomPaint(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-            ),
-            painter: HeaderCurvedContainer(),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(20),
-                width: MediaQuery.of(context).size.width / 3,
-                height: MediaQuery.of(context).size.width / 3,
-                alignment: Alignment(100, 200),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 5),
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/images/male_avatar.png'),
-                    )),
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 280, left: 28),
-            child: Text(
-              "Name",
-              style: TextStyle(
-                  fontSize: 35,
-                  letterSpacing: 1.5,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 400, left: 100),
-            child: CircleAvatar(
-              backgroundColor: Colors.black54,
-              child: IconButton(
-                icon: Icon(
-                  Icons.edit,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
-              ),
-            ),
-          ),
-          SizedBox(height: size.height * 0.03),
-          RoundedButton(
-            text: "CẬP NHẬT",
-            //   press: r,
-          ),
+          // CustomPaint(
+          //   child: Container(
+          //     width: MediaQuery.of(context).size.width,
+          //     height: MediaQuery.of(context).size.height,
+          //   ),
+          //   painter: HeaderCurvedContainer(),
+          // ),
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   children: <Widget>[
+          //     Container(
+          //       padding: EdgeInsets.all(20),
+          //       width: MediaQuery.of(context).size.width / 3,
+          //       height: MediaQuery.of(context).size.width / 3,
+          //       alignment: Alignment(100, 200),
+          //       decoration: BoxDecoration(
+          //           border: Border.all(color: Colors.white, width: 5),
+          //           shape: BoxShape.circle,
+          //           color: Colors.white,
+          //           image: DecorationImage(
+          //             fit: BoxFit.cover,
+          //             image: AssetImage('assets/images/male_avatar.png'),
+          //           )),
+          //     ),
+          //   ],
+          // ),
+          // Padding(
+          //   padding: EdgeInsets.only(bottom: 280, left: 28),
+          //   child: Text(
+          //     "Name",
+          //     style: TextStyle(
+          //         fontSize: 35,
+          //         letterSpacing: 1.5,
+          //         color: Colors.black,
+          //         fontWeight: FontWeight.w500),
+          //   ),
+          // ),
+          // Padding(
+          //   padding: EdgeInsets.only(bottom: 600, left: 100),
+          //   child: CircleAvatar(
+          //     backgroundColor: Colors.black54,
+          //     child: IconButton(
+          //       icon: Icon(
+          //         Icons.edit,
+          //         color: Colors.white,
+          //       ),
+          //       onPressed: () {},
+          //     ),
+          //   ),
+          // ),
+          // SizedBox(height: size.height * 0.03),
         ],
       ),
     );
