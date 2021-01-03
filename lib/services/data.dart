@@ -323,13 +323,16 @@ class Data extends ChangeNotifier {
 
   //
   fetchChart(http.Client client) async {
+    Map<String, double> chart;
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/count', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': '$token',
     });
     if (respone.statusCode == 200) {
-      return json.encode(respone.body);
+      chart = Map.from(json.decode(respone.body))
+          .map((key, value) => MapEntry<String, double>(key, value));
+      return chart;
     } else {
       throw Exception('Fail to load');
     }
