@@ -7,6 +7,7 @@ import 'package:notes/components/background_login.dart';
 import 'package:notes/components/rounded_button.dart';
 import 'package:notes/components/rounded_input_field.dart';
 import 'package:notes/components/rounded_password_field.dart';
+import 'package:notes/config/constants.dart';
 import 'package:notes/models/user_model.dart';
 import 'package:notes/screens/login/login.dart';
 
@@ -78,10 +79,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "SIGNUP",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              "SIGN UP",
+              style: TextStyle(fontSize: 25, color: kPrimaryColor, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: size.height * 0.03),
+            SizedBox(height: size.height * 0.05),
             // SvgPicture.asset(
             //   "assets/icons/signup1.svg",
             //   height: size.height * 0.35,

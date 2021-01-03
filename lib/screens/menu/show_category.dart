@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes/services/data.dart';
+import 'package:notes/themes/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'components/list_view_c.dart';
@@ -20,7 +21,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         title: Text(
           "List Category",
           textAlign: TextAlign.right,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: textColor),
         ),
       ),
       body: SafeArea(

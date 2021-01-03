@@ -7,6 +7,7 @@ import 'package:notes/screens/add_status/add_status.dart';
 import 'package:notes/screens/menu/draw_menu.dart';
 import 'package:notes/screens/menu/notify.dart';
 import 'package:notes/services/data.dart';
+import 'package:notes/themes/colors.dart';
 import 'components/list_view.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           "Notes Manager",
           textAlign: TextAlign.right,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: textColor),
         ),
         leading: FlatButton(
             onPressed: () {

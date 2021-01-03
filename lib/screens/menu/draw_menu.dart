@@ -93,7 +93,7 @@ class _OptionMenuState extends State<OptionMenu> {
                 ),
               ),
             ),
-            new Divider(),
+            // new Divider(),
             ListTile(
               leading: Icon(Icons.settings),
               title: Text(

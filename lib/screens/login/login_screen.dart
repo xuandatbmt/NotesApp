@@ -11,6 +11,7 @@ import 'package:notes/components/rounded_input_field.dart';
 import 'package:notes/components/rounded_password_field.dart';
 import 'package:notes/components/social_icon.dart';
 import 'package:notes/components/text_forgot_pass.dart';
+import 'package:notes/config/constants.dart';
 import 'package:notes/models/user_model.dart';
 import 'package:notes/screens/forgot_password.dart/forgot_screen.dart';
 import 'package:notes/screens/home/home.dart';
@@ -122,9 +123,9 @@ class _LoginScreenState extends State<LoginScreen> {
           children: <Widget>[
             Text(
               "LOGIN",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 25, color: kPrimaryColor, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: size.height * 0.03),
+            SizedBox(height: size.height * 0.05),
             RoundedInputField(
               hintText: "Your Email",
               onChanged: (value) {
