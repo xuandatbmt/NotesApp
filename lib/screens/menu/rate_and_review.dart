@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/themes/colors.dart';
 
 class RateandReview extends StatefulWidget {
   const RateandReview({
@@ -13,9 +14,9 @@ class _RateandReviewPage extends State<RateandReview> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Đánh giá'),
+        title: Text('Rating', style: TextStyle(color: textColor)),
         elevation: 0.0,
-        backgroundColor: Colors.blue[200],
+        backgroundColor: backgroundColor,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {

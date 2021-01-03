@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:notes/components/background_login.dart';
 import 'package:notes/components/rounded_button.dart';
 import 'package:notes/components/rounded_input_field.dart';
+import 'package:notes/config/constants.dart';
 import 'package:notes/models/user_model.dart';
 
 class ForgotPassInput extends StatefulWidget {
@@ -70,8 +71,8 @@ class _ForgotPassInputState extends State<ForgotPassInput> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Forgot Password",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              "FORGOT PASSWORD",
+               style: TextStyle(fontSize: 25, color: kPrimaryColor, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: size.height * 0.03),
             // SvgPicture.asset(

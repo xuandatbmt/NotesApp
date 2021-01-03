@@ -1,3 +1,4 @@
+import 'package:notes/themes/colors.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
         title: Text(
           "Statistics",
           textAlign: TextAlign.right,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: textColor),
         ),
       ),
       body: FutureBuilder(

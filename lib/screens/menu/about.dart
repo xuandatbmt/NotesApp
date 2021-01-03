@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/themes/colors.dart';
 
 class About extends StatefulWidget {
   const About({
@@ -13,9 +14,9 @@ class _AboutPage extends State<About> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Thông tin nhóm'),
+        title: Text('About Us', style: TextStyle(color: textColor)),
         elevation: 0.0,
-        backgroundColor: Colors.blue[200],
+        backgroundColor: backgroundColor,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {

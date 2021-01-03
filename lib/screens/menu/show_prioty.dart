@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes/screens/menu/components/listview_p.dart';
 
 import 'package:notes/services/data.dart';
+import 'package:notes/themes/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,7 +22,7 @@ class _PriotyScreenState extends State<PriotyScreen> {
         title: Text(
           "List Priority",
           textAlign: TextAlign.right,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: textColor),
         ),
       ),
       body: SafeArea(
