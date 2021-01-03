@@ -262,7 +262,7 @@ class Data extends ChangeNotifier {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': '$token',
     });
-    if (respone.statusCode == 201) {
+    if (respone.statusCode == 200) {
       Map<String, dynamic> mapRespone = json.decode(respone.body);
       if (mapRespone["status"] == "ok") {
         final notes = mapRespone["data"].cast<Map<String, dynamic>>();

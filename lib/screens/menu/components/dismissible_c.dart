@@ -29,11 +29,11 @@ class CustomDismissible extends StatelessWidget {
             style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
           ),
           onTap: () {
-            String selectedId = category[index].id;
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => EditNoteScreen(id: selectedId)));
+            // String selectedId = category[index].id;
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) => EditNoteScreen(id: selectedId)));
           },
           contentPadding: EdgeInsets.all(17),
           shape:
