@@ -1,5 +1,5 @@
 
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/screens/login/login.dart';
 import 'package:notes/services/data.dart';
@@ -9,8 +9,8 @@ import 'themes/dark_theme.dart';
 import 'themes/light_theme.dart';
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   runApp(
     MultiProvider(
       child: MyApp(),
