@@ -21,7 +21,7 @@ class AddCategory extends StatelessWidget {
               icon: FontAwesomeIcons.solidSave,
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
-                params["category_name"] = _nameCategory.toString();
+                params["cate_name"] = _nameCategory.toString();
                 await data.addCategory(http.Client(), params);
                 Navigator.pop(context);
               },

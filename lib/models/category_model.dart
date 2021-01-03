@@ -24,12 +24,12 @@ class Category {
   factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
         uid: json["uid"],
-        categoryName: json["category_name"],
+        categoryName: json["cate_name"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "uid": uid,
-        "category_name": categoryName,
+        "cate_name": categoryName,
       };
 }

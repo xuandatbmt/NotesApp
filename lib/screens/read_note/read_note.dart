@@ -90,7 +90,9 @@ class _EditNoteState extends State<EditNote> {
                 maxLines: 1,
                 autocorrect: false,
                 decoration: InputDecoration(hintText: "Title"),
-                controller: TextEditingController(text: this.notes.title),
+                controller: TextEditingController(
+                  text: this.notes.title,
+                ),
                 onChanged: (text) {
                   setState(() {
                     this.notes.title = text;

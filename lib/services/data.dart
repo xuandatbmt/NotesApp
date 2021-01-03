@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:notes/helper/jwt_decode.dart';
 import 'package:notes/models/category_model.dart';
+import 'package:notes/models/chart_model.dart';
 import 'package:notes/models/global.dart';
 import 'package:notes/models/notes_model.dart';
 import 'package:http/http.dart' as http;
@@ -35,6 +36,29 @@ class Data extends ChangeNotifier {
 
   //lấy tất cả list note
   Future<List<Notes>> fetchNotes(http.Client client) async {
+    String token = await Data().getToken();
+    final respone = await client.get(URL_API + '/notes', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': '$token',
+    });
+    if (respone.statusCode == 200) {
+      Map<String, dynamic> mapRespone = json.decode(respone.body);
+      if (mapRespone["status"] == "ok") {
+        final notes = mapRespone["data"].cast<Map<String, dynamic>>();
+        final listNotes = await notes.map<Notes>((json) {
+          return Notes.fromJson(json);
+        }).toList();
+        return listNotes;
+      } else {
+        return [];
+      }
+    } else {
+      throw Exception('Fail to load Notes form the Internet');
+    }
+  }
+
+  //
+  Future<List<Notes>> fetchData(http.Client client) async {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/notes', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
@@ -234,7 +258,7 @@ class Data extends ChangeNotifier {
   //get all category
   Future<List<Category>> fetchCategory(http.Client client) async {
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/category', headers: {
+    final respone = await client.get(URL_API + '/categories', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': '$token',
     });
@@ -293,6 +317,25 @@ class Data extends ChangeNotifier {
       } else {
         return [];
       }
+    } else {
+      throw Exception('Fail to load');
+    }
+  }
+
+  //
+  Future<List<Chart>> fetchChart(http.Client client) async {
+    String token = await Data().getToken();
+    final respone = await client.get(URL_API + '/count', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': '$token',
+    });
+    if (respone.statusCode == 200) {
+      Map<String, dynamic> mapRespone = json.decode(respone.body);
+      final chart = mapRespone["status_count"].cast<Map<String, dynamic>>();
+      final listChart = await chart.map<Chart>((json) {
+        return Chart.fromJson(json);
+      }).toList();
+      return listChart;
     } else {
       throw Exception('Fail to load');
     }

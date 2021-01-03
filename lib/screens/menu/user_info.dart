@@ -44,7 +44,13 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfilePage extends State<UserProfile> {
+  final _controller = TextEditingController();
   ProfileModel profileModel;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
@@ -81,7 +87,8 @@ class _UserProfilePage extends State<UserProfile> {
                         padding: const EdgeInsets.all(15),
                         child: TextField(
                           maxLines: 1,
-                          decoration: InputDecoration(hintText: "Email"),
+                          decoration: InputDecoration(
+                              hintText: "Email", labelText: "Email"),
                           autocorrect: false,
                           controller: TextEditingController(
                               text: this.profileModel.email),
@@ -97,7 +104,8 @@ class _UserProfilePage extends State<UserProfile> {
                         child: TextField(
                           maxLines: 1,
                           autocorrect: false,
-                          decoration: InputDecoration(hintText: "DisplayName"),
+                          decoration: InputDecoration(
+                              hintText: "DisplayName", labelText: "Name"),
                           controller: TextEditingController(
                               text: this.profileModel.displayName),
                           onChanged: (text) {
