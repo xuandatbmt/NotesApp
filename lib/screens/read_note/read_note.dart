@@ -43,8 +43,8 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
 
 class EditNote extends StatefulWidget {
   final Notes notes;
-
-  EditNote({Key key, this.notes}) : super(key: key);
+  final String id;
+  EditNote({Key key, this.notes, this.id}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _EditNoteState();
@@ -52,7 +52,7 @@ class EditNote extends StatefulWidget {
 }
 
 class _EditNoteState extends State<EditNote> {
-  Notes notes = new Notes();
+  Notes notes;
   bool isLoadNote = false;
   DateTime _dateTime;
   @override
@@ -73,7 +73,8 @@ class _EditNoteState extends State<EditNote> {
               icon: FontAwesomeIcons.solidSave,
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
-                params["id"] = this.widget.notes.id;
+
+                params["id"] = this.notes.id;
                 params["title"] = this.notes.title.toString();
                 params["body"] = this.notes.body.toString();
                 // params["title"] = this.notes[index].title.toString();
@@ -114,50 +115,50 @@ class _EditNoteState extends State<EditNote> {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 15, 15, 25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.category),
-                      onPressed: () {
-                        showCategories(context);
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.calendar_today,
-                      ),
-                      onPressed: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1970),
-                          lastDate: DateTime(2030),
-                        ).then((date) => _dateTime = date);
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.playlist_add_check),
-                      color: mainAccentColor,
-                      onPressed: () {
-                        showStatus(context);
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.label_outline),
-                      color: mainAccentColor,
-                      onPressed: () {
-                        showPrioty(context);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            )
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: Padding(
+            //     padding: const EdgeInsets.fromLTRB(15, 15, 15, 25),
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: <Widget>[
+            //         IconButton(
+            //           icon: Icon(Icons.category),
+            //           onPressed: () {
+            //             showCategories(context);
+            //           },
+            //         ),
+            //         IconButton(
+            //           icon: Icon(
+            //             Icons.calendar_today,
+            //           ),
+            //           onPressed: () {
+            //             showDatePicker(
+            //               context: context,
+            //               initialDate: DateTime.now(),
+            //               firstDate: DateTime(1970),
+            //               lastDate: DateTime(2030),
+            //             ).then((date) => _dateTime = date);
+            //           },
+            //         ),
+            //         IconButton(
+            //           icon: Icon(Icons.playlist_add_check),
+            //           color: mainAccentColor,
+            //           onPressed: () {
+            //             showStatus(context);
+            //           },
+            //         ),
+            //         IconButton(
+            //           icon: Icon(Icons.label_outline),
+            //           color: mainAccentColor,
+            //           onPressed: () {
+            //             showPrioty(context);
+            //           },
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // )
           ],
         ),
       ),

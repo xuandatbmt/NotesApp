@@ -6,6 +6,7 @@ import 'package:notes/screens/menu/rate_and_review.dart';
 import 'package:notes/screens/menu/show_category.dart';
 import 'package:notes/screens/menu/show_prioty.dart';
 import 'package:notes/screens/menu/show_status.dart';
+import 'package:notes/screens/menu/statistics.dart';
 import 'package:notes/screens/menu/user_info.dart';
 import 'package:notes/screens/read_note/components/text_field.dart';
 import 'package:notes/screens/settings/settings.dart';
@@ -13,12 +14,14 @@ import 'package:notes/services/data.dart';
 import 'package:http/http.dart' as http;
 
 class OptionMenu extends StatefulWidget {
+  final ProfileModel profileModel;
+  const OptionMenu({Key key, this.profileModel}) : super(key: key);
   @override
   _OptionMenuState createState() => _OptionMenuState();
 }
 
 class _OptionMenuState extends State<OptionMenu> {
-  ProfileModel profileModel = new ProfileModel();
+  ProfileModel profileModel;
   // bool cirucular = true;
   @override
   void initState() {
@@ -36,6 +39,9 @@ class _OptionMenuState extends State<OptionMenu> {
 
   @override
   Widget build(BuildContext context) {
+    // setState(() {
+    //   this.profileModel = ProfileModel.fromModel(widget.profileModel);
+    // });
     return Drawer(
       child: SingleChildScrollView(
         child: Column(
@@ -70,25 +76,21 @@ class _OptionMenuState extends State<OptionMenu> {
                         )),
                       ),
                     ),
-                    Container(
-                      width: 150,
-                      height: 50,
-                      margin: EdgeInsets.only(top: 30, bottom: 5),
-                      child: Column(
-                        children: <Widget>[
-                          ReadingTextField(
-                            text: profileModel.displayName,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 5,
-                          ),
-                          ReadingTextField(
-                            text: profileModel.email,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 5,
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   width: 150,
+                    //   height: 50,
+                    //   margin: EdgeInsets.only(top: 30, bottom: 5),
+                    //   child: Column(
+                    //     children: <Widget>[
+                    //       Text(
+                    //         profileModel.displayName,
+                    //       ),
+                    //       Text(
+                    //         profileModel.email,
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -165,7 +167,7 @@ class _OptionMenuState extends State<OptionMenu> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RateandReview(),
+                    builder: (context) => StatisticsScreen(),
                   ),
                 );
               },

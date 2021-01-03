@@ -2,10 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:notes/helper/jwt_decode.dart';
+import 'package:notes/models/category_model.dart';
 import 'package:notes/models/global.dart';
 import 'package:notes/models/notes_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:notes/models/priority_model.dart';
 import 'package:notes/models/profile.dart';
+import 'package:notes/models/status_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Data extends ChangeNotifier {
@@ -63,7 +66,7 @@ class Data extends ChangeNotifier {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': '$token',
         },
-        body: params);
+        body: json.encode(params));
     if (respone.statusCode == 200) {
       final mapRespone = await json.decode(respone.body);
       if (mapRespone["status"] == "ok") {
@@ -103,12 +106,11 @@ class Data extends ChangeNotifier {
     });
     if (respone.statusCode == 200) {
       Map<String, dynamic> mapRespone = json.decode(respone.body);
-      if (mapRespone["status"] == "ok") {
-        Map<String, dynamic> mapNote = mapRespone["data"];
-        return Notes.fromJson(mapNote);
-      } else {
-        return Notes();
-      }
+
+      Map<String, dynamic> mapNote = mapRespone["data"];
+      // mapNote.addAll(mapRespone["id"]);'
+      // mapNote.addEntries(mapRespone["id"]);
+      return Notes.fromJson(mapNote);
     } else {
       throw Exception('Fail to load NoteID form the Internet');
     }
@@ -158,6 +160,234 @@ class Data extends ChangeNotifier {
     if (respone.statusCode == 200) {
       final responeBody = await json.decode(respone.body);
       return ProfileModel.fromJson(responeBody);
+    } else {
+      throw Exception('Fail to update Notes ');
+    }
+  }
+
+  //
+  Future<bool> addCategory(
+      http.Client client, Map<String, dynamic> params) async {
+    String token = await Data().getToken();
+    final respone = await client.post(URL_API + '/category',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': '$token',
+        },
+        body: json.encode(params));
+    if (respone.statusCode == 201) {
+      final mapRespone = await json.decode(respone.body);
+      if (mapRespone["status"] == "ok") {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      throw Exception('Fail to add category');
+    }
+  }
+
+  // add status
+  Future<bool> addStatus(
+      http.Client client, Map<String, dynamic> params) async {
+    String token = await Data().getToken();
+    final respone = await client.post(URL_API + '/status',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': '$token',
+        },
+        body: json.encode(params));
+    if (respone.statusCode == 201) {
+      final mapRespone = await json.decode(respone.body);
+      if (mapRespone["status"] == "ok") {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      throw Exception('Fail to add status');
+    }
+  }
+
+  //add priority
+  Future<bool> addPriority(
+      http.Client client, Map<String, dynamic> params) async {
+    String token = await Data().getToken();
+    final respone = await client.post(URL_API + '/priority',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': '$token',
+        },
+        body: json.encode(params));
+    if (respone.statusCode == 201) {
+      final mapRespone = await json.decode(respone.body);
+      if (mapRespone["status"] == "ok") {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      throw Exception('Fail to add prioriry');
+    }
+  }
+
+  //get all category
+  Future<List<Category>> fetchCategory(http.Client client) async {
+    String token = await Data().getToken();
+    final respone = await client.get(URL_API + '/category', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': '$token',
+    });
+    if (respone.statusCode == 201) {
+      Map<String, dynamic> mapRespone = json.decode(respone.body);
+      if (mapRespone["status"] == "ok") {
+        final notes = mapRespone["data"].cast<Map<String, dynamic>>();
+        final listCategory = await notes.map<Category>((json) {
+          return Category.fromJson(json);
+        }).toList();
+        return listCategory;
+      } else {
+        return [];
+      }
+    } else {
+      throw Exception('Fail to load');
+    }
+  }
+
+  Future<List<Priority>> fetchPriority(http.Client client) async {
+    String token = await Data().getToken();
+    final respone = await client.get(URL_API + '/priority', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': '$token',
+    });
+    if (respone.statusCode == 200) {
+      Map<String, dynamic> mapRespone = json.decode(respone.body);
+      if (mapRespone["status"] == "ok") {
+        final notes = mapRespone["data"].cast<Map<String, dynamic>>();
+        final listPriority = await notes.map<Priority>((json) {
+          return Priority.fromJson(json);
+        }).toList();
+        return listPriority;
+      } else {
+        return [];
+      }
+    } else {
+      throw Exception('Fail to load');
+    }
+  }
+
+  Future<List<Status>> fetchStatus(http.Client client) async {
+    String token = await Data().getToken();
+    final respone = await client.get(URL_API + '/status', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': '$token',
+    });
+    if (respone.statusCode == 200) {
+      Map<String, dynamic> mapRespone = json.decode(respone.body);
+      if (mapRespone["status"] == "ok") {
+        final notes = mapRespone["data"].cast<Map<String, dynamic>>();
+        final listStatus = await notes.map<Status>((json) {
+          return Status.fromJson(json);
+        }).toList();
+        return listStatus;
+      } else {
+        return [];
+      }
+    } else {
+      throw Exception('Fail to load');
+    }
+  }
+
+  // delete
+  Future<Category> deleteCategory(http.Client client, String id) async {
+    String token = await Data().getToken();
+    final respone = await client.delete(URL_API + '/category/$id', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': '$token',
+    });
+    if (respone.statusCode == 200) {
+      final responeBody = await json.decode(respone.body);
+      return Category.fromJson(responeBody);
+    } else {
+      throw Exception('Fail to delete Note');
+    }
+  }
+
+  Future<Priority> deletePriority(http.Client client, String id) async {
+    String token = await Data().getToken();
+    final respone = await client.delete(URL_API + '/priority/$id', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': '$token',
+    });
+    if (respone.statusCode == 200) {
+      final responeBody = await json.decode(respone.body);
+      return Priority.fromJson(responeBody);
+    } else {
+      throw Exception('Fail to delete Note');
+    }
+  }
+
+  Future<Status> deleteStatus(http.Client client, String id) async {
+    String token = await Data().getToken();
+    final respone = await client.delete(URL_API + '/status/$id', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': '$token',
+    });
+    if (respone.statusCode == 200) {
+      final responeBody = await json.decode(respone.body);
+      return Status.fromJson(responeBody);
+    } else {
+      throw Exception('Fail to delete Note');
+    }
+  }
+
+  //update
+  Future<Status> updateStatus(
+      http.Client client, Map<String, dynamic> params) async {
+    String token = await Data().getToken();
+    final respone = await client.put(URL_API + '/note/${params["id"]}',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': '$token',
+        },
+        body: params);
+    if (respone.statusCode == 200) {
+      final responeBody = await json.decode(respone.body);
+      return Status.fromJson(responeBody);
+    } else {
+      throw Exception('Fail to update Notes ');
+    }
+  }
+
+  Future<Priority> updatePriority(
+      http.Client client, Map<String, dynamic> params) async {
+    String token = await Data().getToken();
+    final respone = await client.put(URL_API + '/note/${params["id"]}',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': '$token',
+        },
+        body: params);
+    if (respone.statusCode == 200) {
+      final responeBody = await json.decode(respone.body);
+      return Priority.fromJson(responeBody);
+    } else {
+      throw Exception('Fail to update Notes ');
+    }
+  }
+
+  Future<Category> updateCategory(
+      http.Client client, Map<String, dynamic> params) async {
+    String token = await Data().getToken();
+    final respone = await client.put(URL_API + '/note/${params["id"]}',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': '$token',
+        },
+        body: params);
+    if (respone.statusCode == 200) {
+      final responeBody = await json.decode(respone.body);
+      return Category.fromJson(responeBody);
     } else {
       throw Exception('Fail to update Notes ');
     }

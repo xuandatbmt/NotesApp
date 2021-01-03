@@ -3,7 +3,9 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:notes/screens/add_category/add_category.dart';
 import 'package:notes/screens/add_note/add_note.dart';
 import 'package:notes/screens/add_prioty/add_prioty.dart';
+import 'package:notes/screens/add_status/add_status.dart';
 import 'package:notes/screens/menu/draw_menu.dart';
+import 'package:notes/screens/menu/notify.dart';
 import 'package:notes/services/data.dart';
 import 'components/list_view.dart';
 import 'package:provider/provider.dart';
@@ -41,10 +43,16 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: Icon(Icons.menu)),
         actions: <Widget>[
+          
           Padding(
             padding: EdgeInsets.only(right: 20.0),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Notify()),
+                );
+              },
               child: Icon(Icons.notifications),
             ),
           )
@@ -95,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // newCategory = Category('Not Specified');
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AddCategorycreen()),
+                MaterialPageRoute(builder: (context) => AddCategory()),
               );
             },
           ),
@@ -106,7 +114,18 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AddPriotycreen()),
+                MaterialPageRoute(builder: (context) => AddPrioty()),
+              );
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.create_sharp),
+            label: "Add Status",
+            backgroundColor: Colors.blue,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddStatus()),
               );
             },
           ),

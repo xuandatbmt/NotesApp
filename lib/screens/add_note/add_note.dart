@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:notes/config/constants.dart';
+import 'package:notes/models/category_model.dart';
+import 'package:notes/models/notes_model.dart';
+import 'package:notes/models/priority_model.dart';
+import 'package:notes/models/status_model.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
@@ -12,10 +16,27 @@ class AddNoteScreen extends StatefulWidget {
   _AddNoteScreenState createState() => _AddNoteScreenState();
 }
 
+List<Category> categoryList;
+List<Priority> priorityList;
+List<Status> statusList;
+List<Notes> notes;
+
 class _AddNoteScreenState extends State<AddNoteScreen> {
   String _title;
   String _content;
   DateTime _dateTime;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void fetchList() {
+    setState(() {
+        
+    });
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
@@ -33,7 +54,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   params["body"] = _content.toString();
                   params["created_at"] = DateTime.now();
                   params["expires_at"] = _dateTime.toString();
-                  params["priority"] = params["status"] =
+                  params["priority"] = params["status"] = params["category"] =
                       await data.addNote(http.Client(), params);
                   Navigator.pop(context);
                 }),
@@ -99,145 +120,143 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       ),
     );
   }
-}
 
-Future<void> showCategories(context) async {
-  await showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return SimpleDialog(
-        backgroundColor: secondaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        title: Text(
-          'Select a Category',
-          style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold),
-        ),
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            // children: List.generate(
-            //   categoryList.length,
-            //   (index) {
-            //     return SimpleDialogOption(
-            //       child: ListTile(
-            //         leading: Icon(
-            //           Icons.label_outline,
-            //           color: categoryList[index].color,
-            //         ),
-            //         title: Text(categoryList[index].name,
-            //             style: TextStyle(
-            //                 color: Colors.black,
-            //                 fontWeight: FontWeight.bold)),
-            //       ),
-            //       onPressed: () {
-            //         setState(() {
-            //           note.category.name = categoryList[index].name;
-            //           note.category.color = categoryList[index].color;
-            //         });
-            //         Navigator.pop(context);
-            //       },
-            //     );
-            //   },
-            // ),
+  Future<void> showCategories(context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          backgroundColor: secondaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
-        ],
-      );
-    },
-  );
-}
+          title: Text(
+            'Select a Category',
+            style:
+                TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold),
+          ),
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(
+                categoryList.length,
+                (index) {
+                  return SimpleDialogOption(
+                    child: ListTile(
+                      title: Text(categoryList[index].categoryName,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        //  = categoryList[index].categoryName;
+                      });
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
-Future<void> showPrioty(context) async {
-  await showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return SimpleDialog(
-        backgroundColor: secondaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        title: Text(
-          'Select a Prioty',
-          style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold),
-        ),
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            // children: List.generate(
-            //   categoryList.length,
-            //   (index) {
-            //     return SimpleDialogOption(
-            //       child: ListTile(
-            //         leading: Icon(
-            //           Icons.label_outline,
-            //           color: categoryList[index].color,
-            //         ),
-            //         title: Text(categoryList[index].name,
-            //             style: TextStyle(
-            //                 color: Colors.black,
-            //                 fontWeight: FontWeight.bold)),
-            //       ),
-            //       onPressed: () {
-            //         setState(() {
-            //           note.category.name = categoryList[index].name;
-            //           note.category.color = categoryList[index].color;
-            //         });
-            //         Navigator.pop(context);
-            //       },
-            //     );
-            //   },
-            // ),
+  Future<void> showPrioty(context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          backgroundColor: secondaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
-        ],
-      );
-    },
-  );
-}
+          title: Text(
+            'Select a Prioty',
+            style:
+                TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold),
+          ),
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // children: List.generate(
+              //   categoryList.length,
+              //   (index) {
+              //     return SimpleDialogOption(
+              //       child: ListTile(
+              //         leading: Icon(
+              //           Icons.label_outline,
+              //           color: categoryList[index].color,
+              //         ),
+              //         title: Text(categoryList[index].name,
+              //             style: TextStyle(
+              //                 color: Colors.black,
+              //                 fontWeight: FontWeight.bold)),
+              //       ),
+              //       onPressed: () {
+              //         setState(() {
+              //           note.category.name = categoryList[index].name;
+              //           note.category.color = categoryList[index].color;
+              //         });
+              //         Navigator.pop(context);
+              //       },
+              //     );
+              //   },
+              // ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
-Future<void> showStatus(context) async {
-  await showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return SimpleDialog(
-        backgroundColor: secondaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        title: Text(
-          'Select a Status',
-          style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold),
-        ),
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            // children: List.generate(
-            //   categoryList.length,
-            //   (index) {
-            //     return SimpleDialogOption(
-            //       child: ListTile(
-            //         leading: Icon(
-            //           Icons.label_outline,
-            //           color: categoryList[index].color,
-            //         ),
-            //         title: Text(categoryList[index].name,
-            //             style: TextStyle(
-            //                 color: Colors.black,
-            //                 fontWeight: FontWeight.bold)),
-            //       ),
-            //       onPressed: () {
-            //         setState(() {
-            //           note.category.name = categoryList[index].name;
-            //           note.category.color = categoryList[index].color;
-            //         });
-            //         Navigator.pop(context);
-            //       },
-            //     );
-            //   },
-            // ),
+  Future<void> showStatus(context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          backgroundColor: secondaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
-        ],
-      );
-    },
-  );
+          title: Text(
+            'Select a Status',
+            style:
+                TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold),
+          ),
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // children: List.generate(
+              //   categoryList.length,
+              //   (index) {
+              //     return SimpleDialogOption(
+              //       child: ListTile(
+              //         leading: Icon(
+              //           Icons.label_outline,
+              //           color: categoryList[index].color,
+              //         ),
+              //         title: Text(categoryList[index].name,
+              //             style: TextStyle(
+              //                 color: Colors.black,
+              //                 fontWeight: FontWeight.bold)),
+              //       ),
+              //       onPressed: () {
+              //         setState(() {
+              //           note.category.name = categoryList[index].name;
+              //           note.category.color = categoryList[index].color;
+              //         });
+              //         Navigator.pop(context);
+              //       },
+              //     );
+              //   },
+              // ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

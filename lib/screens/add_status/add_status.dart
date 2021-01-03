@@ -6,8 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-class AddPrioty extends StatelessWidget {
-  String _namePriority;
+class AddStatus extends StatelessWidget {
+  String _nameStatus;
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
@@ -16,21 +16,20 @@ class AddPrioty extends StatelessWidget {
         child: Column(
           children: <Widget>[
             CustomAppBar(
-              title: 'Add Prioty',
+              title: 'Add Status',
               icon: FontAwesomeIcons.solidSave,
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
-                params["priority_name"] = _namePriority.toString();
-
-                await data.addPriority(http.Client(), params);
+                params["status_name"] = _nameStatus.toString();
+                await data.addStatus(http.Client(), params);
                 Navigator.pop(context);
               },
             ),
             AddingTextField(
               maxLines: 1,
-              hintText: 'Name Prioty',
+              hintText: 'Name Status',
               onChanged: (value) {
-                _namePriority = value;
+                _nameStatus = value;
               },
             ),
             // Flexible(child: AddingTextField(maxLines: 50, hintText: 'Note')),
