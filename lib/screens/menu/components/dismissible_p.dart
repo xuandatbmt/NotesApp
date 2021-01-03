@@ -28,7 +28,7 @@ class CustomDismissible extends StatelessWidget {
             style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
           ),
           onTap: () {
-            String selectedId = priority[index].id;
+            //    String selectedId = priority[index].id;
             // Navigator.push(
             //     context,
             //     MaterialPageRoute(

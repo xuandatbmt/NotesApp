@@ -8,10 +8,8 @@ import 'package:notes/screens/menu/show_prioty.dart';
 import 'package:notes/screens/menu/show_status.dart';
 import 'package:notes/screens/menu/statistics.dart';
 import 'package:notes/screens/menu/user_info.dart';
-import 'package:notes/screens/read_note/components/text_field.dart';
 import 'package:notes/screens/settings/settings.dart';
 import 'package:notes/services/data.dart';
-import 'package:http/http.dart' as http;
 
 class OptionMenu extends StatefulWidget {
   final ProfileModel profileModel;

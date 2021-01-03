@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notes/models/category_model.dart';
-import 'package:notes/models/notes_model.dart';
 import 'dismissible_c.dart';
 
 class CustomListView extends StatelessWidget {

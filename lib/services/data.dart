@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:notes/helper/jwt_decode.dart';
 import 'package:notes/models/category_model.dart';
-import 'package:notes/models/chart_model.dart';
 import 'package:notes/models/global.dart';
 import 'package:notes/models/notes_model.dart';
 import 'package:http/http.dart' as http;
@@ -323,19 +322,14 @@ class Data extends ChangeNotifier {
   }
 
   //
-  Future<List<Chart>> fetchChart(http.Client client) async {
+  fetchChart(http.Client client) async {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/count', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': '$token',
     });
     if (respone.statusCode == 200) {
-      Map<String, dynamic> mapRespone = json.decode(respone.body);
-      final chart = mapRespone["status_count"].cast<Map<String, dynamic>>();
-      final listChart = await chart.map<Chart>((json) {
-        return Chart.fromJson(json);
-      }).toList();
-      return listChart;
+      return json.encode(respone.body);
     } else {
       throw Exception('Fail to load');
     }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes/models/category_model.dart';
-import 'package:notes/screens/read_note/read_note.dart';
 import 'package:notes/services/data.dart';
 import 'package:provider/provider.dart';
 import '../../../widgets/custom_alert_dialog.dart';

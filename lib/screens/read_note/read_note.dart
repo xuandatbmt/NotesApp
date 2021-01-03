@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:notes/config/constants.dart';
 import 'package:notes/models/notes_model.dart';
-import 'package:notes/screens/add_note/add_note.dart';
-import 'package:notes/screens/add_note/components/text_field.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +64,7 @@ class TextController extends TextEditingController {
 class _EditNoteState extends State<EditNote> {
   Notes notes;
   bool isLoadNote = false;
-  DateTime _dateTime;
+ // DateTime _dateTime;
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
