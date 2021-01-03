@@ -66,7 +66,7 @@ class Data extends ChangeNotifier {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': '$token',
         },
-        body: json.encode(params));
+        body: jsonEncode(params));
     if (respone.statusCode == 200) {
       final mapRespone = await json.decode(respone.body);
       if (mapRespone["status"] == "ok") {
@@ -88,7 +88,7 @@ class Data extends ChangeNotifier {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': '$token',
         },
-        body: params);
+        body: jsonEncode(params));
     if (respone.statusCode == 200) {
       final responeBody = await json.decode(respone.body);
       return Notes.fromJson(responeBody);
