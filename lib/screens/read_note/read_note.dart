@@ -50,7 +50,20 @@ class EditNote extends StatefulWidget {
     return _EditNoteState();
   }
 }
+class TextController extends TextEditingController {
 
+  TextController({String text}) {
+    this.text = text;
+  }
+
+  set text(String newText) {
+    value = value.copyWith(
+      text: newText,
+      selection: TextSelection.collapsed(offset: newText.length),
+      composing: TextRange.empty
+    );
+  }
+}
 class _EditNoteState extends State<EditNote> {
   Notes notes;
   bool isLoadNote = false;
@@ -90,7 +103,7 @@ class _EditNoteState extends State<EditNote> {
                 maxLines: 1,
                 autocorrect: false,
                 decoration: InputDecoration(hintText: "Title"),
-                controller: TextEditingController(
+                controller: TextController(
                   text: this.notes.title,
                 ),
                 onChanged: (text) {
@@ -108,7 +121,7 @@ class _EditNoteState extends State<EditNote> {
                   maxLines: 50,
                   autocorrect: false,
                   decoration: InputDecoration(hintText: "Content"),
-                  controller: TextEditingController(text: this.notes.body),
+                  controller: TextController(text: this.notes.body),
                   onChanged: (text) {
                     setState(() {
                       this.notes.body = text;
