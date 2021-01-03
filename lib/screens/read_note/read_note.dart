@@ -81,6 +81,7 @@ class _EditNoteState extends State<EditNote> {
                 if (notes.title != '' && notes.body != '') {
                   await data.updateNote(http.Client(), params);
                   Navigator.pop(context);
+                 
                 }
               },
             ),
