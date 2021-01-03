@@ -145,7 +145,7 @@ class _OptionMenuState extends State<OptionMenu> {
             ListTile(
               leading: Icon(Icons.low_priority),
               title: Text(
-                'Prioty',
+                'Priority',
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {

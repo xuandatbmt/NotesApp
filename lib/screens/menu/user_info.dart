@@ -45,17 +45,20 @@ class UserProfile extends StatefulWidget {
 
 class _UserProfilePage extends State<UserProfile> {
   final _controller = TextEditingController();
+  bool isLoading = false;
   ProfileModel profileModel;
-  @override
-  void initState() {
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
     setState(() {
-      this.profileModel = ProfileModel.fromModel(widget.profileModel);
+      if (this.isLoading == false)
+        this.profileModel = ProfileModel.fromModel(widget.profileModel);
+      this.isLoading = true;
     });
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -138,7 +141,7 @@ class _UserProfilePage extends State<UserProfile> {
                               }
                             },
                             child: Text(
-                              "CẬP NHẬT",
+                              "UPDATE",
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             ),

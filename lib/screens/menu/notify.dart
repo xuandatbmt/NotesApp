@@ -13,7 +13,7 @@ class _NotifyPage extends State<Notify> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Thông báo'),
+        title: Text('Notifications'),
         elevation: 0.0,
         backgroundColor: Colors.blue[200],
         leading: IconButton(
@@ -23,7 +23,9 @@ class _NotifyPage extends State<Notify> {
           },
         ),
       ),
-      body: Center(child: Text('Chưa có thông báo nào!'),),
+      body: Center(
+        child: Text('Chưa có thông báo nào!'),
+      ),
     );
   }
 }

@@ -16,7 +16,7 @@ class AddPrioty extends StatelessWidget {
         child: Column(
           children: <Widget>[
             CustomAppBar(
-              title: 'Add Prioty',
+              title: 'Add Priority',
               icon: FontAwesomeIcons.solidSave,
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
@@ -28,7 +28,7 @@ class AddPrioty extends StatelessWidget {
             ),
             AddingTextField(
               maxLines: 1,
-              hintText: 'Name Prioty',
+              hintText: 'Name Priority',
               onChanged: (value) {
                 _namePriority = value;
               },

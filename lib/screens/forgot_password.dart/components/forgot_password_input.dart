@@ -87,7 +87,7 @@ class _ForgotPassInputState extends State<ForgotPassInput> {
             ),
             // SizedBox(height: size.height * 0.03),
             RoundedButton(
-              text: "XÁC NHẬN",
+              text: "CONFIRM",
               press: forgotPassWord,
             ),
             SizedBox(height: size.height * 0.03),
