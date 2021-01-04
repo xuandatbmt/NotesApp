@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes/models/profile.dart';
 import 'package:notes/services/data.dart';
+import 'package:notes/themes/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
@@ -71,7 +72,8 @@ class _UserProfilePage extends State<UserProfile> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.blue[200],
+        title: Text('User Profile', style: TextStyle(color: textColor)),
+        backgroundColor: backgroundColor,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {

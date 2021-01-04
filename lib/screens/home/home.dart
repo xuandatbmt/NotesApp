@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SpeedDialChild(
             child: Icon(Icons.create_new_folder),
             label: "Add Category",
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.red,
             onTap: () {
               // newCategory = Category('Not Specified');
               Navigator.push(
@@ -119,9 +119,9 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           SpeedDialChild(
-            child: Icon(Icons.dangerous),
+            child: Icon(Icons.done_all),
             label: "Add Status",
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.green,
             onTap: () {
               Navigator.push(
                 context,

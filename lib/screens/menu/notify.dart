@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/themes/colors.dart';
 
 class Notify extends StatefulWidget {
   const Notify({
@@ -13,9 +14,9 @@ class _NotifyPage extends State<Notify> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notifications'),
+        title: Text('Notifications', style: TextStyle(color: textColor)),
         elevation: 0.0,
-        backgroundColor: Colors.blue[200],
+        backgroundColor: backgroundColor,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {

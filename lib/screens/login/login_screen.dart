@@ -13,7 +13,7 @@ import 'package:notes/components/social_icon.dart';
 import 'package:notes/components/text_forgot_pass.dart';
 import 'package:notes/config/constants.dart';
 import 'package:notes/models/user_model.dart';
-import 'package:notes/screens/forgot_password.dart/forgot_screen.dart';
+import 'package:notes/screens/forgot_password/forgot_screen.dart';
 import 'package:notes/screens/home/home.dart';
 import 'package:notes/screens/login/login_facebook.dart';
 import 'package:notes/screens/login/login_google.dart';
