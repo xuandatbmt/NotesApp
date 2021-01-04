@@ -18,6 +18,7 @@ import 'package:notes/screens/home/home.dart';
 import 'package:notes/screens/login/login_facebook.dart';
 import 'package:notes/screens/login/login_google.dart';
 import 'package:notes/screens/signup/signup.dart';
+import 'package:notes/services/shared_pref.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -110,6 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     checkLoginStatus();
+    context.read<SharedPref>().getTheme();
   }
 
   @override
@@ -123,7 +125,10 @@ class _LoginScreenState extends State<LoginScreen> {
           children: <Widget>[
             Text(
               "LOGIN",
-              style: TextStyle(fontSize: 25, color: kPrimaryColor, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 25,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold),
             ),
             SizedBox(height: size.height * 0.05),
             RoundedInputField(

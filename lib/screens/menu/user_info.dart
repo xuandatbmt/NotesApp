@@ -43,15 +43,22 @@ class UserProfile extends StatefulWidget {
   _UserProfilePage createState() => _UserProfilePage();
 }
 
+class TextController extends TextEditingController {
+  TextController({String text}) {
+    this.text = text;
+  }
+
+  set text(String newText) {
+    value = value.copyWith(
+        text: newText,
+        selection: TextSelection.collapsed(offset: newText.length),
+        composing: TextRange.empty);
+  }
+}
+
 class _UserProfilePage extends State<UserProfile> {
-  final _controller = TextEditingController();
   bool isLoading = false;
   ProfileModel profileModel;
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
@@ -93,8 +100,8 @@ class _UserProfilePage extends State<UserProfile> {
                           decoration: InputDecoration(
                               hintText: "Email", labelText: "Email"),
                           autocorrect: false,
-                          controller: TextEditingController(
-                              text: this.profileModel.email),
+                          controller:
+                              TextController(text: this.profileModel.email),
                           onChanged: (text) {
                             setState(() {
                               this.profileModel.email = text;
@@ -109,7 +116,7 @@ class _UserProfilePage extends State<UserProfile> {
                           autocorrect: false,
                           decoration: InputDecoration(
                               hintText: "DisplayName", labelText: "Name"),
-                          controller: TextEditingController(
+                          controller: TextController(
                               text: this.profileModel.displayName),
                           onChanged: (text) {
                             setState(() {

@@ -32,7 +32,7 @@ class ProfileModel {
   String tokensValidAfterTime;
   List<ProviderDatum> providerData;
   factory ProfileModel.fromModel(ProfileModel model) =>
-      ProfileModel(email: model.displayName, displayName: model.email);
+      ProfileModel(email: model.email, displayName: model.displayName);
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
         uid: json["uid"],
         email: json["email"],

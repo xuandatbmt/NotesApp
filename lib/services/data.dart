@@ -179,12 +179,12 @@ class Data extends ChangeNotifier {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': '$token',
         },
-        body: params);
+        body: json.encode(params));
     if (respone.statusCode == 200) {
       final responeBody = await json.decode(respone.body);
       return ProfileModel.fromJson(responeBody);
     } else {
-      throw Exception('Fail to update Notes ');
+      throw Exception('Fail to update Profile ');
     }
   }
 
@@ -331,7 +331,7 @@ class Data extends ChangeNotifier {
     });
     if (respone.statusCode == 200) {
       chart = Map.from(json.decode(respone.body))
-          .map((key, value) => MapEntry<String, double>(key, value));
+          .map((key, value) => MapEntry<String, double>(key, value.toDouble()));
       return chart;
     } else {
       throw Exception('Fail to load');
