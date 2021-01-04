@@ -44,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: Icon(Icons.menu)),
         actions: <Widget>[
-          
           Padding(
             padding: EdgeInsets.only(right: 20.0),
             child: GestureDetector(
@@ -120,9 +119,9 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           SpeedDialChild(
-            child: Icon(Icons.create_sharp),
+            child: Icon(Icons.dangerous),
             label: "Add Status",
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.red,
             onTap: () {
               Navigator.push(
                 context,

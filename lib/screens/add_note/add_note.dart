@@ -28,13 +28,11 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   @override
   void initState() {
     super.initState();
+    fetchList();
   }
 
   void fetchList() {
-    setState(() {
-        
-    });
-    
+    setState(() {});
   }
 
   @override
@@ -54,8 +52,10 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   params["body"] = _content.toString();
                   params["created_at"] = DateTime.now();
                   params["expires_at"] = _dateTime.toString();
-                  params["priority"] = params["status"] = params["category"] =
-                      await data.addNote(http.Client(), params);
+                  // params["priority"] =  this.prioritySelect.toString();
+                  // params["status"] = this.statusSelect.toString();
+                  //  params["category"] = this.categorySelect.toString();
+                  await data.addNote(http.Client(), params);
                   Navigator.pop(context);
                 }),
             AddingTextField(
@@ -150,7 +150,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                     ),
                     onPressed: () {
                       setState(() {
-                        //  = categoryList[index].categoryName;
+                        // this.categorySelect = categoryList[index].categoryName;
                       });
                       Navigator.pop(context);
                     },
