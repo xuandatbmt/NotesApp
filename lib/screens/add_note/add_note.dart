@@ -5,8 +5,6 @@ import 'package:notes/models/category_model.dart';
 import 'package:notes/models/notes_model.dart';
 import 'package:notes/models/priority_model.dart';
 import 'package:notes/models/status_model.dart';
-import 'package:notes/screens/home/components/list_view.dart';
-import 'package:notes/screens/home/home.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
@@ -18,9 +16,6 @@ class AddNoteScreen extends StatefulWidget {
   @override
   _AddNoteScreenState createState() => _AddNoteScreenState();
 }
-
-Data _data;
-
 class _AddNoteScreenState extends State<AddNoteScreen> {
   String _title;
   String _content;
@@ -34,21 +29,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   String _statusSelected;
   var _dateofTime;
   @override
-  void initState() {
-    //  this.fetchList();
-    super.initState();
-  }
-
-  // fetchList() async {
-  //   this.categoryList = _data.fetchCategory(http.Client());
-  //   this.priorityList = _data.fetchPriority(http.Client());
-  //   this.statusList = _data.fetchStatus(http.Client());
-  // }
-
-  @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -59,8 +41,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 onPressed: () async {
                   Map<String, dynamic> params = Map<String, dynamic>();
                   params["title"] = _title.toString();
-                  params["body"] = _content.toString();
-                  //params["created_at"] = DateTime.now();
+                  params["body"] = _content.toString();             
                   params["expires_at"] = _dateofTime.toString();
                   params["priority"] = _prioritySelected.toString();
                   params["status"] = _statusSelected.toString();

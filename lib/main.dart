@@ -1,6 +1,5 @@
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:notes/screens/intro/intro.dart';
 import 'package:notes/screens/login/login.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/services/shared_pref.dart';
