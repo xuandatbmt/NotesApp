@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:notes/config/constants.dart';
 import 'package:notes/models/category_model.dart';
 import 'package:notes/models/notes_model.dart';
@@ -31,6 +32,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   String _categorySelected;
   String _prioritySelected;
   String _statusSelected;
+  var _dateofTime;
   @override
   void initState() {
     //  this.fetchList();
@@ -59,12 +61,13 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   params["title"] = _title.toString();
                   params["body"] = _content.toString();
                   //params["created_at"] = DateTime.now();
-                  params["expires_at"] = _dateTime.toString();
+                  params["expires_at"] = _dateofTime.toString();
                   params["priority"] = _prioritySelected.toString();
                   params["status"] = _statusSelected.toString();
                   params["category"] = _categorySelected.toString();
                   await data.addNote(http.Client(), params);
                   Navigator.pop(context);
+                  data.update();
                 }),
             AddingTextField(
                 maxLines: 1,
@@ -96,14 +99,23 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                       icon: Icon(
                         Icons.calendar_today,
                       ),
-                      onPressed: () {
-                        showDatePicker(
+                      onPressed: () async {
+                        await showDatePicker(
                           context: context,
-                          initialDate: DateTime.now(),
+                          initialDate: DateTime.now().add(Duration(seconds: 1)),
                           firstDate: DateTime(1970),
                           lastDate: DateTime(2030),
                         ).then((date) => _dateTime = date);
-                        print(_dateTime);
+                        final _time = await showTimePicker(
+                          context: context,
+                          initialTime: TimeOfDay(
+                              hour: DateTime.now().hour,
+                              minute: DateTime.now().minute),
+                        );
+                        _dateofTime = _time.format(context) +
+                            " " +
+                            DateFormat("dd/MM/yyyy").format(_dateTime);
+                        print(_dateofTime);
                       },
                     ),
                     IconButton(
@@ -155,6 +167,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                         this._categorySelected =
                             snapshot.data[index].categoryName;
                         Navigator.pop(context);
+
                         print(_categorySelected);
                       },
                     );
