@@ -68,7 +68,7 @@ class _UserProfilePage extends State<UserProfile> {
         this.profileModel = ProfileModel.fromModel(widget.profileModel);
       this.isLoading = true;
     });
-    Size size = MediaQuery.of(context).size;
+    //Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,

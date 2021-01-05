@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notes/screens/home/home.dart';
-import 'package:notes/screens/login/login.dart';
-import 'package:notes/services/data.dart';
 import 'package:notes/services/shared_pref.dart';
-import 'package:notes/themes/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
-
 class SplashScreenS extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -34,7 +29,7 @@ class _SplashScreenState extends State<SplashScreenS> {
 
   @override
   Widget build(BuildContext context) {
-    var data = Provider.of<SharedPref>(context);
+    //var data = Provider.of<SharedPref>(context);
 
     return SplashScreen(
       // seconds: 3,
