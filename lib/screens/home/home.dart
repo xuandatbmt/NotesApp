@@ -1,5 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:notes/models/category_model.dart';
+import 'package:notes/models/global.dart';
+import 'package:notes/models/priority_model.dart';
+import 'package:notes/models/status_model.dart';
 import 'package:notes/screens/add_category/add_category.dart';
 import 'package:notes/screens/add_note/add_note.dart';
 import 'package:notes/screens/add_prioty/add_prioty.dart';
@@ -30,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           "Notes Manager",
           textAlign: TextAlign.right,
-          style: TextStyle(color: primaryColor),
+          style: TextStyle(color: fabSplashColor),
         ),
         leading: FlatButton(
             onPressed: () {

@@ -93,10 +93,10 @@ class _UserProfilePage extends State<UserProfile> {
                   width: double.infinity,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(8),
                         child: TextField(
                           maxLines: 1,
                           decoration: InputDecoration(
@@ -112,7 +112,7 @@ class _UserProfilePage extends State<UserProfile> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(8),
                         child: TextField(
                           maxLines: 1,
                           autocorrect: false,

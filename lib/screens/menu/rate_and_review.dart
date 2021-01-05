@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes/themes/colors.dart';
+import 'package:notes/widgets/custom_appbar.dart';
 
 class RateandReview extends StatefulWidget {
   const RateandReview({
@@ -13,19 +14,22 @@ class _RateandReviewPage extends State<RateandReview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Rating', style: TextStyle(color: textColor)),
-        elevation: 0.0,
-        backgroundColor: backgroundColor,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+     body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 45, bottom: 45),
+              child: CustomAppBar(
+                title: 'Rating',
+                isVisible: false,
+              ),
+            ),
+            Center(
+              child: Text("Text"),
+            )
+          ],
         ),
-      ),
-      body: Center(
-        child: Text(''),
       ),
     );
   }

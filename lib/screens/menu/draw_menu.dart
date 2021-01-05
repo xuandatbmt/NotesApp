@@ -10,6 +10,7 @@ import 'package:notes/screens/menu/statistics.dart';
 import 'package:notes/screens/menu/user_info.dart';
 import 'package:notes/screens/settings/settings.dart';
 import 'package:notes/services/data.dart';
+import 'package:notes/themes/colors.dart';
 
 class OptionMenu extends StatefulWidget {
   final ProfileModel profileModel;
@@ -47,7 +48,7 @@ class _OptionMenuState extends State<OptionMenu> {
             Container(
               width: double.infinity,
               padding: EdgeInsets.all(20),
-              color: Colors.blue[500],
+              // color: backgroundColor,
               child: Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,26 +75,24 @@ class _OptionMenuState extends State<OptionMenu> {
                         )),
                       ),
                     ),
-                    // Container(
-                    //   width: 150,
-                    //   height: 50,
-                    //   margin: EdgeInsets.only(top: 30, bottom: 5),
-                    //   child: Column(
-                    //     children: <Widget>[
-                    //       Text(
-                    //         profileModel.displayName,
-                    //       ),
-                    //       Text(
-                    //         profileModel.email,
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
+                    Container(
+                      width: 200,
+                      height: 60,
+                      margin: EdgeInsets.only(top: 30),
+                      child: ListTile(
+                        title: Text(
+                          "User Profile",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
             // new Divider(),
+            new Divider(),
             ListTile(
               leading: Icon(Icons.settings),
               title: Text(

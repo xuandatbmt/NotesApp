@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes/themes/colors.dart';
+import 'package:notes/widgets/custom_appbar.dart';
 
 class Notify extends StatefulWidget {
   const Notify({
@@ -13,19 +14,22 @@ class _NotifyPage extends State<Notify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Notifications', style: TextStyle(color: textColor)),
-        elevation: 0.0,
-        backgroundColor: backgroundColor,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+     body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 45, bottom: 45),
+              child: CustomAppBar(
+                title: 'Notification',
+                isVisible: false,
+              ),
+            ),
+            Center(
+              child: Text("Text"),
+            )
+          ],
         ),
-      ),
-      body: Center(
-        child: Text('Chưa có thông báo nào!'),
       ),
     );
   }
