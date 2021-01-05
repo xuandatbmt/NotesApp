@@ -16,8 +16,18 @@ class EditNoteScreen extends StatefulWidget {
 }
 
 class _EditNoteScreenState extends State<EditNoteScreen> {
+  // TextEditingController titleEditingController = TextEditingController();
+  // TextEditingController textEditingController = TextEditingController();
+  // @override
+  // void dispose() {
+  //   textEditingController.dispose();
+  //   titleEditingController.dispose();
+  //   super.dispose();
+  // }
   @override
   Widget build(BuildContext context) {
+    // titleEditingController.text = note.title;
+    // textEditingController.text = note.text;
     var data = context.watch<Data>();
     return Scaffold(
         body: FutureBuilder(
@@ -47,24 +57,24 @@ class EditNote extends StatefulWidget {
     return _EditNoteState();
   }
 }
-class TextController extends TextEditingController {
 
+class TextController extends TextEditingController {
   TextController({String text}) {
     this.text = text;
   }
 
   set text(String newText) {
     value = value.copyWith(
-      text: newText,
-      selection: TextSelection.collapsed(offset: newText.length),
-      composing: TextRange.empty
-    );
+        text: newText,
+        selection: TextSelection.collapsed(offset: newText.length),
+        composing: TextRange.empty);
   }
 }
+
 class _EditNoteState extends State<EditNote> {
   Notes notes;
   bool isLoadNote = false;
- // DateTime _dateTime;
+  // DateTime _dateTime;
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
@@ -91,7 +101,6 @@ class _EditNoteState extends State<EditNote> {
                 if (notes.title != '' && notes.body != '') {
                   await data.updateNote(http.Client(), params);
                   Navigator.pop(context);
-                 
                 }
               },
             ),
@@ -128,50 +137,6 @@ class _EditNoteState extends State<EditNote> {
                 ),
               ),
             ),
-            // Align(
-            //   alignment: Alignment.bottomCenter,
-            //   child: Padding(
-            //     padding: const EdgeInsets.fromLTRB(15, 15, 15, 25),
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //       children: <Widget>[
-            //         IconButton(
-            //           icon: Icon(Icons.category),
-            //           onPressed: () {
-            //             showCategories(context);
-            //           },
-            //         ),
-            //         IconButton(
-            //           icon: Icon(
-            //             Icons.calendar_today,
-            //           ),
-            //           onPressed: () {
-            //             showDatePicker(
-            //               context: context,
-            //               initialDate: DateTime.now(),
-            //               firstDate: DateTime(1970),
-            //               lastDate: DateTime(2030),
-            //             ).then((date) => _dateTime = date);
-            //           },
-            //         ),
-            //         IconButton(
-            //           icon: Icon(Icons.playlist_add_check),
-            //           color: mainAccentColor,
-            //           onPressed: () {
-            //             showStatus(context);
-            //           },
-            //         ),
-            //         IconButton(
-            //           icon: Icon(Icons.label_outline),
-            //           color: mainAccentColor,
-            //           onPressed: () {
-            //             showPrioty(context);
-            //           },
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // )
           ],
         ),
       ),

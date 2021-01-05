@@ -89,7 +89,7 @@ class Data extends ChangeNotifier {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': '$token',
         },
-        body: jsonEncode(params));
+        body: json.encode(params));
     if (respone.statusCode == 200) {
       final mapRespone = await json.decode(respone.body);
       if (mapRespone["status"] == "ok") {
@@ -255,7 +255,7 @@ class Data extends ChangeNotifier {
   }
 
   //get all category
-  Future<List<Category>> fetchCategory(http.Client client) async {
+  fetchCategory(http.Client client) async {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/categories', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
@@ -277,7 +277,7 @@ class Data extends ChangeNotifier {
     }
   }
 
-  Future<List<Priority>> fetchPriority(http.Client client) async {
+  fetchPriority(http.Client client) async {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/priority', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
@@ -299,7 +299,7 @@ class Data extends ChangeNotifier {
     }
   }
 
-  Future<List<Status>> fetchStatus(http.Client client) async {
+  fetchStatus(http.Client client) async {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/status', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
