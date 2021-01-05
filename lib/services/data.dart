@@ -90,7 +90,7 @@ class Data extends ChangeNotifier {
           'Authorization': '$token',
         },
         body: json.encode(params));
-    if (respone.statusCode == 200) {
+    if (respone.statusCode == 201) {
       final mapRespone = await json.decode(respone.body);
       if (mapRespone["status"] == "ok") {
         return true;
