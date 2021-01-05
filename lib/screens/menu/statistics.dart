@@ -25,7 +25,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
         title: Text(
           "Statistics",
           textAlign: TextAlign.right,
-          style: TextStyle(color: textColor),
+          style: TextStyle(color: fabSplashColor),
         ),
       ),
       body: FutureBuilder(

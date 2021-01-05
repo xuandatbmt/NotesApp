@@ -21,7 +21,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         title: Text(
           "List Category",
           textAlign: TextAlign.right,
-          style: TextStyle(color: textColor),
+          style: TextStyle(color: fabSplashColor),
         ),
       ),
       body: SafeArea(

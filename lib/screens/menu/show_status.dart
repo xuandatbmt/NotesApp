@@ -22,7 +22,7 @@ class _StatusScreenState extends State<StatusScreen> {
         title: Text(
           "List Status",
           textAlign: TextAlign.right,
-          style: TextStyle(color: textColor),
+          style: TextStyle(color: fabSplashColor),
         ),
       ),
       body: SafeArea(

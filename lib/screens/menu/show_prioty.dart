@@ -22,7 +22,7 @@ class _PriotyScreenState extends State<PriotyScreen> {
         title: Text(
           "List Priority",
           textAlign: TextAlign.right,
-          style: TextStyle(color: textColor),
+          style: TextStyle(color: fabSplashColor),
         ),
       ),
       body: SafeArea(
