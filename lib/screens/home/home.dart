@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           "Notes Manager",
           textAlign: TextAlign.right,
-          style: TextStyle(color: Color(0xff40b3fb)),
+          style: TextStyle(color: primaryColor),
         ),
         leading: FlatButton(
             onPressed: () {
