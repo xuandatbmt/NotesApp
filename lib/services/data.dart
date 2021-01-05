@@ -177,7 +177,7 @@ class Data extends ChangeNotifier {
   Future<ProfileModel> updateProfile(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final respone = await client.post(URL_API + '/updateprofile/',
+    final respone = await client.post(URL_API + '/updateprofile',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': '$token',
