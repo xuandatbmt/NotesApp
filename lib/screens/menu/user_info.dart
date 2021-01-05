@@ -93,7 +93,7 @@ class _UserProfilePage extends State<UserProfile> {
                   width: double.infinity,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8),
