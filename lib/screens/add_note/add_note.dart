@@ -142,7 +142,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                     return ListTile(
                       title: Text(snapshot.data[index].categoryName,
                           style: TextStyle(
-                              color: Colors.black,
+                              // color: Colors.black,
                               fontWeight: FontWeight.bold)),
                       onTap: () {
                         this._categorySelected =
@@ -190,7 +190,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                     return ListTile(
                       title: Text(snapshot.data[index].priorityName,
                           style: TextStyle(
-                              color: Colors.black,
+                              // color: Colors.black,
                               fontWeight: FontWeight.bold)),
                       onTap: () {
                         this._prioritySelected =
@@ -237,7 +237,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                     return ListTile(
                       title: Text(snapshot.data[index].statusName,
                           style: TextStyle(
-                              color: Colors.black,
+                              // color: Colors.black,
                               fontWeight: FontWeight.bold)),
                       onTap: () {
                         this._statusSelected = snapshot.data[index].statusName;
