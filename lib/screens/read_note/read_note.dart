@@ -111,6 +111,7 @@ class _EditNoteState extends State<EditNote> {
                 params["expires_at"] = _dateofTime.toString();
                 params["priority"] = _prioritySelected.toString();
                 params["status"] = _statusSelected.toString();
+                params["update_at"] = DateTime.now().toString();
                 params["category"] = _categorySelected.toString();
                 if (notes.title != '' && notes.body != '') {
                   await data.updateNote(http.Client(), params);
