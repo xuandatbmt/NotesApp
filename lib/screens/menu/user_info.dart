@@ -72,8 +72,8 @@ class _UserProfilePage extends State<UserProfile> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: Text('User Profile', style: TextStyle(color: textColor)),
-        backgroundColor: backgroundColor,
+        title: Text('User Profile', style: TextStyle(color: fabSplashColor)),
+        backgroundColor: Colors.white10,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
