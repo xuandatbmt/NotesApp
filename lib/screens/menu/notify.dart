@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:notes/themes/colors.dart';
 import 'package:notes/widgets/custom_appbar.dart';
 
 class Notify extends StatefulWidget {

@@ -10,7 +10,6 @@ import 'package:notes/screens/menu/statistics.dart';
 import 'package:notes/screens/menu/user_info.dart';
 import 'package:notes/screens/settings/settings.dart';
 import 'package:notes/services/data.dart';
-import 'package:notes/themes/colors.dart';
 
 class OptionMenu extends StatefulWidget {
   final ProfileModel profileModel;

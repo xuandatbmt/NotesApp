@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes/models/lang.dart';
 import 'package:notes/services/shared_pref.dart';
 import 'package:notes/widgets/custom_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -50,15 +51,23 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                   SettingsListTile(
-                    title: 'Languages',
-                    trailing: IconButton(
-                        icon: Icon(FontAwesomeIcons.language,
-                            color: Theme.of(context).primaryIconTheme.color,
-                            size: 25),
-                        onPressed: () {}
-                        // _launchURL,
+                      title: 'Languages',
+                      trailing: DropdownButton(
+                        underline: SizedBox(),
+                        icon: Icon(
+                          Icons.language,
+                          color: Colors.white,
                         ),
-                  ),
+                        items: getLanguages.map((Language lang) {
+                          return new DropdownMenuItem<String>(
+                            value: lang.languageCode,
+                            child: new Text(lang.name),
+                          );
+                        }).toList(),
+                        onChanged: (val) {
+                          print(val);
+                        },
+                      )),
                   SettingsListTile(
                     title: 'Source code',
                     trailing: IconButton(
