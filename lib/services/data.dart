@@ -41,7 +41,7 @@ class Data extends ChangeNotifier {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/notes', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
       Map<String, dynamic> mapRespone = json.decode(respone.body);
@@ -64,7 +64,7 @@ class Data extends ChangeNotifier {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/notes', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
       Map<String, dynamic> mapRespone = json.decode(respone.body);
@@ -90,7 +90,7 @@ class Data extends ChangeNotifier {
     final respone = await client.post(URL_API + '/note',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': '$token',
+          'Authorization': 'Bearer $token',
         },
         body: json.encode(params));
     if (respone.statusCode == 201) {
@@ -112,7 +112,7 @@ class Data extends ChangeNotifier {
     final respone = await client.put(URL_API + '/note/${params["id"]}',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': '$token',
+          'Authorization': 'Bearer $token',
         },
         body: jsonEncode(params));
     if (respone.statusCode == 200) {
@@ -128,7 +128,7 @@ class Data extends ChangeNotifier {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/note/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
       Map<String, dynamic> mapRespone = json.decode(respone.body);
@@ -147,7 +147,7 @@ class Data extends ChangeNotifier {
     String token = await Data().getToken();
     final respone = await client.delete(URL_API + '/note/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
       final responeBody = await json.decode(respone.body);
@@ -163,7 +163,7 @@ class Data extends ChangeNotifier {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/userinfo', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
       final responeBody = await json.decode(respone.body);
@@ -180,7 +180,7 @@ class Data extends ChangeNotifier {
     final respone = await client.post(URL_API + '/updateprofile',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': '$token',
+          'Authorization': 'Bearer $token',
         },
         body: json.encode(params));
     if (respone.statusCode == 200) {
@@ -198,7 +198,7 @@ class Data extends ChangeNotifier {
     final respone = await client.post(URL_API + '/category',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': '$token',
+          'Authorization': 'Bearer $token',
         },
         body: json.encode(params));
     if (respone.statusCode == 201) {
@@ -220,7 +220,7 @@ class Data extends ChangeNotifier {
     final respone = await client.post(URL_API + '/status',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': '$token',
+          'Authorization': 'Bearer $token',
         },
         body: json.encode(params));
     if (respone.statusCode == 201) {
@@ -242,7 +242,7 @@ class Data extends ChangeNotifier {
     final respone = await client.post(URL_API + '/priority',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': '$token',
+          'Authorization': 'Bearer $token',
         },
         body: json.encode(params));
     if (respone.statusCode == 201) {
@@ -262,7 +262,7 @@ class Data extends ChangeNotifier {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/categories', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
       Map<String, dynamic> mapRespone = json.decode(respone.body);
@@ -284,7 +284,7 @@ class Data extends ChangeNotifier {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/priority', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
       Map<String, dynamic> mapRespone = json.decode(respone.body);
@@ -306,7 +306,7 @@ class Data extends ChangeNotifier {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/status', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
       Map<String, dynamic> mapRespone = json.decode(respone.body);
@@ -330,7 +330,7 @@ class Data extends ChangeNotifier {
     String token = await Data().getToken();
     final respone = await client.get(URL_API + '/count', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
       chart = Map.from(json.decode(respone.body))
@@ -346,7 +346,7 @@ class Data extends ChangeNotifier {
     String token = await Data().getToken();
     final respone = await client.delete(URL_API + '/category/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
       final responeBody = await json.decode(respone.body);
@@ -360,7 +360,7 @@ class Data extends ChangeNotifier {
     String token = await Data().getToken();
     final respone = await client.delete(URL_API + '/priority/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
       final responeBody = await json.decode(respone.body);
@@ -374,7 +374,7 @@ class Data extends ChangeNotifier {
     String token = await Data().getToken();
     final respone = await client.delete(URL_API + '/status/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': '$token',
+      'Authorization': 'Bearer $token',
     });
     if (respone.statusCode == 200) {
       final responeBody = await json.decode(respone.body);
@@ -391,7 +391,7 @@ class Data extends ChangeNotifier {
     final respone = await client.put(URL_API + '/note/${params["id"]}',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': '$token',
+          'Authorization': 'Bearer $token',
         },
         body: params);
     if (respone.statusCode == 200) {
@@ -408,7 +408,7 @@ class Data extends ChangeNotifier {
     final respone = await client.put(URL_API + '/note/${params["id"]}',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': '$token',
+          'Authorization': 'Bearer $token',
         },
         body: params);
     if (respone.statusCode == 200) {
@@ -425,7 +425,7 @@ class Data extends ChangeNotifier {
     final respone = await client.put(URL_API + '/note/${params["id"]}',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': '$token',
+          'Authorization': 'Bearer $token',
         },
         body: params);
     if (respone.statusCode == 200) {

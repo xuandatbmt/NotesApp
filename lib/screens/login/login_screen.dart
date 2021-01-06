@@ -71,10 +71,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (response.statusCode == 200) {
       showToast("Login succesful");
       var data = json.decode(response.body);
-      if (data['refreshToken'] != null) {
-        _saveToken(data['refreshToken']);
+      if (data['accessToken'] != null) {
+        _saveToken(data['accessToken']);
         token = sharedPreferences.getString("token");
-        await sharedPreferences.setString("token", data['refreshToken']);
+        await sharedPreferences.setString("token", data['accessToken']);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
             (Route<dynamic> route) => false);
