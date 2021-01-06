@@ -8,6 +8,7 @@ import 'package:notes/components/background_login.dart';
 import 'package:notes/components/rounded_button.dart';
 import 'package:notes/components/rounded_input_field.dart';
 import 'package:notes/config/constants.dart';
+import 'package:notes/models/global.dart';
 import 'package:notes/models/user_model.dart';
 
 class ForgotPassInput extends StatefulWidget {
@@ -29,7 +30,7 @@ class _ForgotPassInputState extends State<ForgotPassInput> {
   Future<UserModel> forgotPassWord() async {
     var response = await http
         .post(
-      'https://api-mobile-app.herokuapp.com/api/resetpass',
+      URL_API + '/resetpass',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -72,7 +73,10 @@ class _ForgotPassInputState extends State<ForgotPassInput> {
           children: <Widget>[
             Text(
               "FORGOT PASSWORD",
-               style: TextStyle(fontSize: 25, color: kPrimaryColor, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 25,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold),
             ),
             SizedBox(height: size.height * 0.03),
             // SvgPicture.asset(

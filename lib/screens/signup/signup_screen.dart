@@ -8,6 +8,7 @@ import 'package:notes/components/rounded_button.dart';
 import 'package:notes/components/rounded_input_field.dart';
 import 'package:notes/components/rounded_password_field.dart';
 import 'package:notes/config/constants.dart';
+import 'package:notes/models/global.dart';
 import 'package:notes/models/user_model.dart';
 import 'package:notes/screens/login/login.dart';
 
@@ -28,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Future<UserModel> createUser() async {
     var response = await http
         .post(
-      'https://api-mobile-app.herokuapp.com/api/signup',
+      URL_API + '/signup',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -80,7 +81,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: <Widget>[
             Text(
               "SIGN UP",
-              style: TextStyle(fontSize: 25, color: kPrimaryColor, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 25,
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold),
             ),
             SizedBox(height: size.height * 0.05),
             // SvgPicture.asset(

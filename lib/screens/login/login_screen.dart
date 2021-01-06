@@ -12,6 +12,7 @@ import 'package:notes/components/rounded_password_field.dart';
 import 'package:notes/components/social_icon.dart';
 import 'package:notes/components/text_forgot_pass.dart';
 import 'package:notes/config/constants.dart';
+import 'package:notes/models/global.dart';
 import 'package:notes/models/user_model.dart';
 import 'package:notes/screens/forgot_password/forgot_screen.dart';
 import 'package:notes/screens/home/home.dart';
@@ -55,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var response = await http
         .post(
-      'https://api-mobile-app.herokuapp.com/api/signin',
+      URL_API + '/signin',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
