@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:notes/services/data.dart';
+import 'package:provider/provider.dart';
 class CustomAppBar extends StatelessWidget {
   CustomAppBar({this.title, this.isVisible, this.icon, this.onPressed});
   final String title;
@@ -9,6 +10,7 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  //  var data = context.watch<Data>();
     return Padding(
       padding: EdgeInsets.all(10),
       child: Row(
@@ -17,6 +19,7 @@ class CustomAppBar extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.arrow_back, size: 27),
             onPressed: () => Navigator.pop(context),
+           
           ),
           Text(
             title,

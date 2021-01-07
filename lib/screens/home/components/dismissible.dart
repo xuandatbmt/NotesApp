@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes/models/notes_model.dart';
@@ -18,7 +16,7 @@ class CustomDismissible extends StatelessWidget {
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
 
-    return Dismissible(
+    return new Dismissible(
       key: ValueKey(notes[index].title),
       direction: DismissDirection.endToStart,
       child: Card(
@@ -91,6 +89,7 @@ class CustomDismissible extends StatelessWidget {
       ),
       onDismissed: (direction) async {
         await data.deleteNote(http.Client(), this.notes[index].id);
+        data.update();
       },
       confirmDismiss: (direction) => showDialog(
           context: context, builder: (context) => CustomAlertDialog()),
