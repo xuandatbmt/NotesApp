@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class AddCategory extends StatelessWidget {
   String _nameCategory;
   @override

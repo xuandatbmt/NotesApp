@@ -134,8 +134,6 @@ class Data extends ChangeNotifier {
       Map<String, dynamic> mapRespone = json.decode(respone.body);
 
       Map<String, dynamic> mapNote = mapRespone["data"];
-      // mapNote.addAll(mapRespone["id"]);'
-      // mapNote.addEntries(mapRespone["id"]);
       return Notes.fromJson(mapNote);
     } else {
       throw Exception('Fail to load NoteID form the Internet');
@@ -433,6 +431,54 @@ class Data extends ChangeNotifier {
       return Category.fromJson(responeBody);
     } else {
       throw Exception('Fail to update Notes ');
+    }
+  }
+
+  Future<Category> fetchCateId(http.Client client, String id) async {
+    String token = await Data().getToken();
+    final respone = await client.get(URL_API + '/category/$id', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
+    });
+    if (respone.statusCode == 200) {
+      Map<String, dynamic> mapRespone = json.decode(respone.body);
+
+      Map<String, dynamic> mapOk = mapRespone["data"];
+      return Category.fromJson(mapOk);
+    } else {
+      throw Exception('Fail');
+    }
+  }
+
+  Future<Status> fetchStatusId(http.Client client, String id) async {
+    String token = await Data().getToken();
+    final respone = await client.get(URL_API + '/status/$id', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
+    });
+    if (respone.statusCode == 200) {
+      Map<String, dynamic> mapRespone = json.decode(respone.body);
+
+      Map<String, dynamic> mapOk = mapRespone["data"];
+      return Status.fromJson(mapOk);
+    } else {
+      throw Exception('Fail');
+    }
+  }
+
+  Future<Priority> fetchPriorityId(http.Client client, String id) async {
+    String token = await Data().getToken();
+    final respone = await client.get(URL_API + '/priority/$id', headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
+    });
+    if (respone.statusCode == 200) {
+      Map<String, dynamic> mapRespone = json.decode(respone.body);
+
+      Map<String, dynamic> mapOk = mapRespone["data"];
+      return Priority.fromJson(mapOk);
+    } else {
+      throw Exception('Fail');
     }
   }
 }

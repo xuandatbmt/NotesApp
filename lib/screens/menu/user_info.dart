@@ -59,6 +59,7 @@ class TextController extends TextEditingController {
 
 class _UserProfilePage extends State<UserProfile> {
   bool isLoading = false;
+  String _newPassWord;
   ProfileModel profileModel;
   @override
   Widget build(BuildContext context) {
@@ -102,13 +103,6 @@ class _UserProfilePage extends State<UserProfile> {
                           decoration: InputDecoration(
                               hintText: "Email", labelText: "Email"),
                           autocorrect: false,
-                          controller:
-                              TextController(text: this.profileModel.email),
-                          onChanged: (text) {
-                            setState(() {
-                              this.profileModel.email = text;
-                            });
-                          },
                         ),
                       ),
                       Padding(
@@ -127,6 +121,20 @@ class _UserProfilePage extends State<UserProfile> {
                           },
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: TextField(
+                          maxLines: 1,
+                          autocorrect: false,
+                          decoration: InputDecoration(
+                              hintText: "Password", labelText: "Password"),
+                          onChanged: (text) {
+                            setState(() {
+                              _newPassWord = text;
+                            });
+                          },
+                        ),
+                      ),
                       Container(
                         height: 55,
                         width: double.infinity,
@@ -141,10 +149,10 @@ class _UserProfilePage extends State<UserProfile> {
                               params["displayName"] =
                                   this.profileModel.displayName.toString();
                               this.profileModel.toString();
-                              params["email"] =
-                                  this.profileModel.email.toString();
-                              if (profileModel.displayName != '' &&
-                                  profileModel.email != '') {
+                              if (_newPassWord != '') {
+                                params["password"] = _newPassWord.toString();
+                              }
+                              if (profileModel.displayName != '') {
                                 await data.updateProfile(http.Client(), params);
                                 Navigator.pop(context);
                               }
@@ -163,57 +171,6 @@ class _UserProfilePage extends State<UserProfile> {
               ],
             ),
           ),
-          // CustomPaint(
-          //   child: Container(
-          //     width: MediaQuery.of(context).size.width,
-          //     height: MediaQuery.of(context).size.height,
-          //   ),
-          //   painter: HeaderCurvedContainer(),
-          // ),
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.center,
-          //   children: <Widget>[
-          //     Container(
-          //       padding: EdgeInsets.all(20),
-          //       width: MediaQuery.of(context).size.width / 3,
-          //       height: MediaQuery.of(context).size.width / 3,
-          //       alignment: Alignment(100, 200),
-          //       decoration: BoxDecoration(
-          //           border: Border.all(color: Colors.white, width: 5),
-          //           shape: BoxShape.circle,
-          //           color: Colors.white,
-          //           image: DecorationImage(
-          //             fit: BoxFit.cover,
-          //             image: AssetImage('assets/images/male_avatar.png'),
-          //           )),
-          //     ),
-          //   ],
-          // ),
-          // Padding(
-          //   padding: EdgeInsets.only(bottom: 280, left: 28),
-          //   child: Text(
-          //     "Name",
-          //     style: TextStyle(
-          //         fontSize: 35,
-          //         letterSpacing: 1.5,
-          //         color: Colors.black,
-          //         fontWeight: FontWeight.w500),
-          //   ),
-          // ),
-          // Padding(
-          //   padding: EdgeInsets.only(bottom: 600, left: 100),
-          //   child: CircleAvatar(
-          //     backgroundColor: Colors.black54,
-          //     child: IconButton(
-          //       icon: Icon(
-          //         Icons.edit,
-          //         color: Colors.white,
-          //       ),
-          //       onPressed: () {},
-          //     ),
-          //   ),
-          // ),
-          // SizedBox(height: size.height * 0.03),
         ],
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes/models/status_model.dart';
+import 'package:notes/screens/menu/edit_status.dart';
 
 import 'package:notes/services/data.dart';
 import 'package:provider/provider.dart';
@@ -28,11 +29,11 @@ class CustomDismissible extends StatelessWidget {
             style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
           ),
           onTap: () {
-           // String selectedId = status[index].id;
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => EditNoteScreen(id: selectedId)));
+           String selectedId = status[index].id;
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => EditStatus(id: selectedId)));
           },
           contentPadding: EdgeInsets.all(17),
           shape:

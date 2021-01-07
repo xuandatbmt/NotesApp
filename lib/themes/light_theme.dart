@@ -44,6 +44,7 @@ ThemeData lightTheme = ThemeData(
   ),
 
 
+  // ignore: deprecated_member_use
   cursorColor: primaryColor,
   inputDecorationTheme: InputDecorationTheme(
     hintStyle: TextStyle(

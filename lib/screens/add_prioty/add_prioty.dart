@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class AddPrioty extends StatelessWidget {
   String _namePriority;
   @override
@@ -21,7 +22,6 @@ class AddPrioty extends StatelessWidget {
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
                 params["priority_name"] = _namePriority.toString();
-
                 await data.addPriority(http.Client(), params);
                 Navigator.pop(context);
               },
@@ -33,7 +33,6 @@ class AddPrioty extends StatelessWidget {
                 _namePriority = value;
               },
             ),
-            // Flexible(child: AddingTextField(maxLines: 50, hintText: 'Note')),
           ],
         ),
       ),

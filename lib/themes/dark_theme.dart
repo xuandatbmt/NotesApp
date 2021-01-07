@@ -44,6 +44,7 @@ ThemeData darkTheme = ThemeData(
   ),
 
 
+  // ignore: deprecated_member_use
   cursorColor: darkThemePrimaryColor,
   inputDecorationTheme: InputDecorationTheme(
     hintStyle: TextStyle(

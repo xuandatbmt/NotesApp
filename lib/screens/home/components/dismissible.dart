@@ -67,14 +67,6 @@ class CustomDismissible extends StatelessWidget {
               ),
             ]),
           ),
-          // leading: Text(
-          //   notes[index].createdAt,
-          //   style: TextStyle(
-          //     fontSize: 12,
-          //     fontWeight: FontWeight.w400,
-          //     color: Color(0xff959EA7),
-          //   ),
-          // ),
           onTap: () {
             String selectedId = notes[index].id;
             Navigator.push(
