@@ -1,4 +1,4 @@
-const URL_API = 'http://18.163.196.185/api';
+const URL_API = 'http://18.163.196.185:8080/api';
 // const URL_SIGNIN_POST = 'https://api-mobile-app.herokuapp.com/api/signin';
 // const URL_SIGNUP_POST = 'https://api-mobile-app.herokuapp.com/api/signup';
 // const URL_FORGOTPASS_POST = 'https://api-mobile-app.herokuapp.com/api/resetpass';
