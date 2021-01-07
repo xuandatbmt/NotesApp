@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes/models/notes_model.dart';
@@ -42,12 +44,12 @@ class CustomDismissible extends StatelessWidget {
               Text(
                 notes[index].createdAt,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: FontWeight.w400,
                   color: Color(0xff959EA7),
                 ),
               ),
-              SizedBox(height: 5),
+              SizedBox(height: 4),
               Text(
                 notes[index].status,
                 style: TextStyle(
@@ -56,7 +58,7 @@ class CustomDismissible extends StatelessWidget {
                   color: Color(0xff959EA7),
                 ),
               ),
-              SizedBox(height: 5),
+              SizedBox(height: 4),
               Text(
                 notes[index].category,
                 style: TextStyle(
