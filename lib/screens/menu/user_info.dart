@@ -100,8 +100,10 @@ class _UserProfilePage extends State<UserProfile> {
                         padding: const EdgeInsets.all(8),
                         child: TextField(
                           maxLines: 1,
-                          decoration: InputDecoration(
-                              hintText: "Email", labelText: "Email"),
+                          enabled: false,
+                          decoration: InputDecoration(labelText: "Email"),
+                          controller:
+                              TextController(text: this.profileModel.email),
                           autocorrect: false,
                         ),
                       ),
