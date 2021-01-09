@@ -119,14 +119,14 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                     ),
                     IconButton(
                       icon: Icon(Icons.playlist_add_check),
-                      color: mainAccentColor,
+                      // color: mainAccentColor,
                       onPressed: () {
                         _showStatus(context);
                       },
                     ),
                     IconButton(
                       icon: Icon(Icons.label_outline),
-                      color: mainAccentColor,
+                      // color: mainAccentColor,
                       onPressed: () {
                         _showPriority(context);
                       },
