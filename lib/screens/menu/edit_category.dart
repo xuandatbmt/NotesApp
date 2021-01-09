@@ -62,14 +62,15 @@ class TextController extends TextEditingController {
 }
 
 class _EditCategorySState extends State<EditCategoryScreen> {
-  bool isLoadNote = false;
+  bool isLoad = false;
   Category category;
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
-    if (isLoadNote == false) {
+    if (isLoad == false) {
       setState(() {
         this.category = Category.fromCateList(widget.category);
+        isLoad = true;
       });
     }
     return Scaffold(

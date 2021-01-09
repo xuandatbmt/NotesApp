@@ -70,6 +70,7 @@ class _EditPrioritySState extends State<EditPriorityScreen> {
     if (isLoad == false) {
       setState(() {
         this.priority = Priority.fromPriorityList(widget.priority);
+        isLoad = true;
       });
     }
     return Scaffold(

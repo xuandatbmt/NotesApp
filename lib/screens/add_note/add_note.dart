@@ -16,6 +16,7 @@ class AddNoteScreen extends StatefulWidget {
   @override
   _AddNoteScreenState createState() => _AddNoteScreenState();
 }
+
 class _AddNoteScreenState extends State<AddNoteScreen> {
   String _title;
   String _content;
@@ -41,14 +42,31 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 onPressed: () async {
                   Map<String, dynamic> params = Map<String, dynamic>();
                   params["title"] = _title.toString();
-                  params["body"] = _content.toString();             
+                  params["body"] = _content.toString();
                   params["expires_at"] = _dateofTime.toString();
                   params["priority"] = _prioritySelected.toString();
                   params["status"] = _statusSelected.toString();
                   params["category"] = _categorySelected.toString();
-                  await data.addNote(http.Client(), params);
-                  Navigator.pop(context);
-                  data.update();
+                  if (_title != '' &&
+                      _content != '' &&
+                      _categorySelected != '' &&
+                      _statusSelected != '' &&
+                      _prioritySelected != '' &&
+                      _dateofTime != '') {
+                    await data.addNote(http.Client(), params);
+                    Navigator.pop(context);
+                    data.update();
+                  } else {
+                    return AlertDialog(
+                      title: Text('Wrong'),
+                      content: Text('Missing data?'),
+                      actions: <Widget>[
+                        myFlatButton('OK', Colors.grey, false),
+                      ],
+                      contentPadding: EdgeInsets.fromLTRB(25, 15, 25, 5),
+                      insetPadding: EdgeInsets.symmetric(horizontal: 20),
+                    );
+                  }
                 }),
             AddingTextField(
                 maxLines: 1,
@@ -264,4 +282,13 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
           );
         },
       );
+  Widget myFlatButton(title, color, value) {
+    return FlatButton(
+      child: Text(
+        title,
+        style: TextStyle(color: color),
+      ),
+      onPressed: () => Navigator.of(context).pop(value),
+    );
+  }
 }
