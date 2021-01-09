@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-
+import 'package:notes/services/shared_pref.dart';
+import 'package:provider/provider.dart';
 class LoginWithFacebook extends StatefulWidget {
   @override
   _LoginWithFacebookState createState() => _LoginWithFacebookState();
@@ -15,8 +16,10 @@ class _LoginWithFacebookState extends State<LoginWithFacebook> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = context.watch<SharedPref>();
     return Scaffold(
       appBar: AppBar(
+        brightness: theme.isNight ? Brightness.dark : Brightness.light,
         title: Text("facebook login"),
       ),
       body: isSignIn

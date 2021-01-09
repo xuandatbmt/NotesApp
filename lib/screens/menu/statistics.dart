@@ -1,3 +1,4 @@
+import 'package:notes/services/shared_pref.dart';
 import 'package:notes/themes/colors.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
@@ -18,8 +19,10 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
+    var theme = context.watch<SharedPref>();
     return Scaffold(
       appBar: AppBar(
+        brightness: theme.isNight ? Brightness.dark : Brightness.light,
         backgroundColor: Colors.white10,
         elevation: 0.0,
         title: Text(

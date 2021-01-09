@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:notes/screens/add_category/add_category.dart';
@@ -8,6 +7,7 @@ import 'package:notes/screens/add_status/add_status.dart';
 import 'package:notes/screens/menu/draw_menu.dart';
 import 'package:notes/screens/menu/notify.dart';
 import 'package:notes/services/data.dart';
+import 'package:notes/services/shared_pref.dart';
 import 'package:notes/themes/colors.dart';
 import 'components/list_view.dart';
 import 'package:provider/provider.dart';
@@ -24,9 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var data = context.watch<Data>();
+    var theme = context.watch<SharedPref>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white10,
+        brightness: theme.isNight ? Brightness.dark : Brightness.light,
         elevation: 0.0,
         title: Text(
           "Notes Manager",

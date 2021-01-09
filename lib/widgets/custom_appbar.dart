@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes/services/data.dart';
-import 'package:provider/provider.dart';
+
 class CustomAppBar extends StatelessWidget {
   CustomAppBar({this.title, this.isVisible, this.icon, this.onPressed});
   final String title;
