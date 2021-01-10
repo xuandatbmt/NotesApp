@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:notes/config/constants.dart';
 import 'package:notes/models/category_model.dart';
 import 'package:notes/models/notes_model.dart';
 import 'package:notes/models/priority_model.dart';

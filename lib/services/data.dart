@@ -39,14 +39,14 @@ class Data extends ChangeNotifier {
   //lấy tất cả list note
   Future<List<Notes>> fetchNotes(http.Client client) async {
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/notes', headers: {
+    final response = await client.get(URL_API + '/notes', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      Map<String, dynamic> mapRespone = json.decode(respone.body);
-      if (mapRespone["status"] == "ok") {
-        final notes = mapRespone["data"].cast<Map<String, dynamic>>();
+    if (response.statusCode == 200) {
+      Map<String, dynamic> mapResponse = json.decode(response.body);
+      if (mapResponse["status"] == "ok") {
+        final notes = mapResponse["data"].cast<Map<String, dynamic>>();
         final listNotes = await notes.map<Notes>((json) {
           return Notes.fromJson(json);
         }).toList();
@@ -62,14 +62,14 @@ class Data extends ChangeNotifier {
   //
   Future<List<Notes>> fetchData(http.Client client) async {
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/notes', headers: {
+    final response = await client.get(URL_API + '/notes', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      Map<String, dynamic> mapRespone = json.decode(respone.body);
-      if (mapRespone["status"] == "ok") {
-        final notes = mapRespone["data"].cast<Map<String, dynamic>>();
+    if (response.statusCode == 200) {
+      Map<String, dynamic> mapResponse = json.decode(response.body);
+      if (mapResponse["status"] == "ok") {
+        final notes = mapResponse["data"].cast<Map<String, dynamic>>();
         final listNotes = await notes.map<Notes>((json) {
           return Notes.fromJson(json);
         }).toList();
@@ -87,15 +87,15 @@ class Data extends ChangeNotifier {
   //   String minutes = now.minute < 10 ? '0${now.minute}' : '${now.minute}';
   Future<bool> addNote(http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final respone = await client.post(URL_API + '/note',
+    final response = await client.post(URL_API + '/note',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
         body: json.encode(params));
-    if (respone.statusCode == 201) {
-      final mapRespone = await json.decode(respone.body);
-      if (mapRespone["status"] == "ok") {
+    if (response.statusCode == 201) {
+      final mapResponse = await json.decode(response.body);
+      if (mapResponse["status"] == "ok") {
         return true;
       } else {
         return false;
@@ -109,15 +109,15 @@ class Data extends ChangeNotifier {
   Future<Notes> updateNote(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final respone = await client.put(URL_API + '/note/${params["id"]}',
+    final response = await client.put(URL_API + '/note/${params["id"]}',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
         body: jsonEncode(params));
-    if (respone.statusCode == 200) {
-      final responeBody = await json.decode(respone.body);
-      return Notes.fromJson(responeBody);
+    if (response.statusCode == 200) {
+      final responseBody = await json.decode(response.body);
+      return Notes.fromJson(responseBody);
     } else {
       throw Exception('Fail to update Notes ');
     }
@@ -126,14 +126,14 @@ class Data extends ChangeNotifier {
   // lấy note theo id
   Future<Notes> fetchNoteId(http.Client client, String id) async {
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/note/$id', headers: {
+    final response = await client.get(URL_API + '/note/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      Map<String, dynamic> mapRespone = json.decode(respone.body);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> mapResponse = json.decode(response.body);
 
-      Map<String, dynamic> mapNote = mapRespone["data"];
+      Map<String, dynamic> mapNote = mapResponse["data"];
       return Notes.fromJson(mapNote);
     } else {
       throw Exception('Fail to load NoteID form the Internet');
@@ -143,13 +143,13 @@ class Data extends ChangeNotifier {
   // xóa note theo id
   Future<Notes> deleteNote(http.Client client, String id) async {
     String token = await Data().getToken();
-    final respone = await client.delete(URL_API + '/note/$id', headers: {
+    final response = await client.delete(URL_API + '/note/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      final responeBody = await json.decode(respone.body);
-      return Notes.fromJson(responeBody);
+    if (response.statusCode == 200) {
+      final responseBody = await json.decode(response.body);
+      return Notes.fromJson(responseBody);
     } else {
       throw Exception('Fail to delete Note');
     }
@@ -159,13 +159,13 @@ class Data extends ChangeNotifier {
   //get profile
   Future<ProfileModel> getProfile(http.Client client) async {
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/userinfo', headers: {
+    final response = await client.get(URL_API + '/userinfo', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      final responeBody = await json.decode(respone.body);
-      return ProfileModel.fromJson(responeBody);
+    if (response.statusCode == 200) {
+      final responseBody = await json.decode(response.body);
+      return ProfileModel.fromJson(responseBody);
     } else {
       throw Exception('Fail to get Profile form the Internet');
     }
@@ -175,15 +175,15 @@ class Data extends ChangeNotifier {
   Future<ProfileModel> updateProfile(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final respone = await client.post(URL_API + '/updateprofile',
+    final response = await client.post(URL_API + '/updateprofile',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
         body: json.encode(params));
-    if (respone.statusCode == 200) {
-      final responeBody = await json.decode(respone.body);
-      return ProfileModel.fromJson(responeBody);
+    if (response.statusCode == 200) {
+      final responseBody = await json.decode(response.body);
+      return ProfileModel.fromJson(responseBody);
     } else {
       throw Exception('Fail to update Profile ');
     }
@@ -193,15 +193,15 @@ class Data extends ChangeNotifier {
   Future<bool> addCategory(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final respone = await client.post(URL_API + '/category',
+    final response = await client.post(URL_API + '/category',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
         body: json.encode(params));
-    if (respone.statusCode == 201) {
-      final mapRespone = await json.decode(respone.body);
-      if (mapRespone["status"] == "ok") {
+    if (response.statusCode == 201) {
+      final mapResponse = await json.decode(response.body);
+      if (mapResponse["status"] == "ok") {
         return true;
       } else {
         return false;
@@ -215,15 +215,15 @@ class Data extends ChangeNotifier {
   Future<bool> addStatus(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final respone = await client.post(URL_API + '/status',
+    final response = await client.post(URL_API + '/status',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
         body: json.encode(params));
-    if (respone.statusCode == 201) {
-      final mapRespone = await json.decode(respone.body);
-      if (mapRespone["status"] == "ok") {
+    if (response.statusCode == 201) {
+      final mapResponse = await json.decode(response.body);
+      if (mapResponse["status"] == "ok") {
         return true;
       } else {
         return false;
@@ -237,15 +237,15 @@ class Data extends ChangeNotifier {
   Future<bool> addPriority(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final respone = await client.post(URL_API + '/priority',
+    final response = await client.post(URL_API + '/priority',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
         body: json.encode(params));
-    if (respone.statusCode == 201) {
-      final mapRespone = await json.decode(respone.body);
-      if (mapRespone["status"] == "ok") {
+    if (response.statusCode == 201) {
+      final mapResponse = await json.decode(response.body);
+      if (mapResponse["status"] == "ok") {
         return true;
       } else {
         return false;
@@ -258,14 +258,14 @@ class Data extends ChangeNotifier {
   //get all category
   fetchCategory(http.Client client) async {
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/categories', headers: {
+    final response = await client.get(URL_API + '/categories', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      Map<String, dynamic> mapRespone = json.decode(respone.body);
-      if (mapRespone["status"] == "ok") {
-        final notes = mapRespone["data"].cast<Map<String, dynamic>>();
+    if (response.statusCode == 200) {
+      Map<String, dynamic> mapResponse = json.decode(response.body);
+      if (mapResponse["status"] == "ok") {
+        final notes = mapResponse["data"].cast<Map<String, dynamic>>();
         final listCategory = await notes.map<Category>((json) {
           return Category.fromJson(json);
         }).toList();
@@ -280,14 +280,14 @@ class Data extends ChangeNotifier {
 
   fetchPriority(http.Client client) async {
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/priority', headers: {
+    final response = await client.get(URL_API + '/priority', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      Map<String, dynamic> mapRespone = json.decode(respone.body);
-      if (mapRespone["status"] == "ok") {
-        final notes = mapRespone["data"].cast<Map<String, dynamic>>();
+    if (response.statusCode == 200) {
+      Map<String, dynamic> mapResponse = json.decode(response.body);
+      if (mapResponse["status"] == "ok") {
+        final notes = mapResponse["data"].cast<Map<String, dynamic>>();
         final listPriority = await notes.map<Priority>((json) {
           return Priority.fromJson(json);
         }).toList();
@@ -302,14 +302,14 @@ class Data extends ChangeNotifier {
 
   fetchStatus(http.Client client) async {
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/status', headers: {
+    final response = await client.get(URL_API + '/status', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      Map<String, dynamic> mapRespone = json.decode(respone.body);
-      if (mapRespone["status"] == "ok") {
-        final notes = mapRespone["data"].cast<Map<String, dynamic>>();
+    if (response.statusCode == 200) {
+      Map<String, dynamic> mapResponse = json.decode(response.body);
+      if (mapResponse["status"] == "ok") {
+        final notes = mapResponse["data"].cast<Map<String, dynamic>>();
         final listStatus = await notes.map<Status>((json) {
           return Status.fromJson(json);
         }).toList();
@@ -326,12 +326,12 @@ class Data extends ChangeNotifier {
   fetchChart(http.Client client) async {
     Map<String, double> chart;
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/count', headers: {
+    final response = await client.get(URL_API + '/count', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      chart = Map.from(json.decode(respone.body))
+    if (response.statusCode == 200) {
+      chart = Map.from(json.decode(response.body))
           .map((key, value) => MapEntry<String, double>(key, value.toDouble()));
       return chart;
     } else {
@@ -342,13 +342,13 @@ class Data extends ChangeNotifier {
   // delete
   Future<Category> deleteCategory(http.Client client, String id) async {
     String token = await Data().getToken();
-    final respone = await client.delete(URL_API + '/category/$id', headers: {
+    final response = await client.delete(URL_API + '/category/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      final responeBody = await json.decode(respone.body);
-      return Category.fromJson(responeBody);
+    if (response.statusCode == 200) {
+      final responseBody = await json.decode(response.body);
+      return Category.fromJson(responseBody);
     } else {
       throw Exception('Fail to delete Note');
     }
@@ -356,13 +356,13 @@ class Data extends ChangeNotifier {
 
   Future<Priority> deletePriority(http.Client client, String id) async {
     String token = await Data().getToken();
-    final respone = await client.delete(URL_API + '/priority/$id', headers: {
+    final response = await client.delete(URL_API + '/priority/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      final responeBody = await json.decode(respone.body);
-      return Priority.fromJson(responeBody);
+    if (response.statusCode == 200) {
+      final responseBody = await json.decode(response.body);
+      return Priority.fromJson(responseBody);
     } else {
       throw Exception('Fail to delete Note');
     }
@@ -370,13 +370,13 @@ class Data extends ChangeNotifier {
 
   Future<Status> deleteStatus(http.Client client, String id) async {
     String token = await Data().getToken();
-    final respone = await client.delete(URL_API + '/status/$id', headers: {
+    final response = await client.delete(URL_API + '/status/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      final responeBody = await json.decode(respone.body);
-      return Status.fromJson(responeBody);
+    if (response.statusCode == 200) {
+      final responseBody = await json.decode(response.body);
+      return Status.fromJson(responseBody);
     } else {
       throw Exception('Fail to delete Note');
     }
@@ -386,15 +386,15 @@ class Data extends ChangeNotifier {
   Future<Status> updateStatus(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final respone = await client.put(URL_API + '/note/${params["id"]}',
+    final response = await client.put(URL_API + '/note/${params["id"]}',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
         body: params);
-    if (respone.statusCode == 200) {
-      final responeBody = await json.decode(respone.body);
-      return Status.fromJson(responeBody);
+    if (response.statusCode == 200) {
+      final responseBody = await json.decode(response.body);
+      return Status.fromJson(responseBody);
     } else {
       throw Exception('Fail to update Notes ');
     }
@@ -403,15 +403,15 @@ class Data extends ChangeNotifier {
   Future<Priority> updatePriority(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final respone = await client.put(URL_API + '/note/${params["id"]}',
+    final response = await client.put(URL_API + '/note/${params["id"]}',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
         body: params);
-    if (respone.statusCode == 200) {
-      final responeBody = await json.decode(respone.body);
-      return Priority.fromJson(responeBody);
+    if (response.statusCode == 200) {
+      final responseBody = await json.decode(response.body);
+      return Priority.fromJson(responseBody);
     } else {
       throw Exception('Fail to update Notes ');
     }
@@ -420,15 +420,15 @@ class Data extends ChangeNotifier {
   Future<Category> updateCategory(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final respone = await client.put(URL_API + '/note/${params["id"]}',
+    final response = await client.put(URL_API + '/note/${params["id"]}',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
         body: params);
-    if (respone.statusCode == 200) {
-      final responeBody = await json.decode(respone.body);
-      return Category.fromJson(responeBody);
+    if (response.statusCode == 200) {
+      final responseBody = await json.decode(response.body);
+      return Category.fromJson(responseBody);
     } else {
       throw Exception('Fail to update Notes ');
     }
@@ -436,14 +436,14 @@ class Data extends ChangeNotifier {
 
   Future<Category> fetchCateId(http.Client client, String id) async {
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/category/$id', headers: {
+    final response = await client.get(URL_API + '/category/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      Map<String, dynamic> mapRespone = json.decode(respone.body);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> mapResponse = json.decode(response.body);
 
-      Map<String, dynamic> mapOk = mapRespone["data"];
+      Map<String, dynamic> mapOk = mapResponse["data"];
       return Category.fromJson(mapOk);
     } else {
       throw Exception('Fail');
@@ -452,14 +452,14 @@ class Data extends ChangeNotifier {
 
   Future<Status> fetchStatusId(http.Client client, String id) async {
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/status/$id', headers: {
+    final response = await client.get(URL_API + '/status/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      Map<String, dynamic> mapRespone = json.decode(respone.body);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> mapResponse = json.decode(response.body);
 
-      Map<String, dynamic> mapOk = mapRespone["data"];
+      Map<String, dynamic> mapOk = mapResponse["data"];
       return Status.fromJson(mapOk);
     } else {
       throw Exception('Fail');
@@ -468,14 +468,14 @@ class Data extends ChangeNotifier {
 
   Future<Priority> fetchPriorityId(http.Client client, String id) async {
     String token = await Data().getToken();
-    final respone = await client.get(URL_API + '/priority/$id', headers: {
+    final response = await client.get(URL_API + '/priority/$id', headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     });
-    if (respone.statusCode == 200) {
-      Map<String, dynamic> mapRespone = json.decode(respone.body);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> mapResponse = json.decode(response.body);
 
-      Map<String, dynamic> mapOk = mapRespone["data"];
+      Map<String, dynamic> mapOk = mapResponse["data"];
       return Priority.fromJson(mapOk);
     } else {
       throw Exception('Fail');
