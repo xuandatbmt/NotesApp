@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
           "Notes Manager",
           textAlign: TextAlign.right,
           style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 24, color: fabSplashColor),
+              fontWeight: FontWeight.bold, fontSize: 20, color: fabSplashColor),
         ),
         leading: FlatButton(
             onPressed: () {
