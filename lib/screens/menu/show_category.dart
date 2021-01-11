@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/localization/localization_constants.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/services/shared_pref.dart';
 import 'package:notes/themes/colors.dart';
@@ -22,7 +23,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         backgroundColor: Colors.white10,
         elevation: 0.0,
         title: Text(
-          "List Category",
+          getTranslated(context, 'category_screen'),
           textAlign: TextAlign.right,
           style: TextStyle(color: fabSplashColor),
         ),

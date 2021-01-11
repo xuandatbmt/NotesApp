@@ -23,21 +23,8 @@ class SettingsScreen extends StatelessWidget {
         return;
     }
 
-    void _changeLanguage(Language language) {
-      Locale _temp;
-      switch (language.languageCode) {
-        case 'en':
-          _temp = Locale(language.languageCode, 'GB');
-          break;
-        case 'vi':
-          _temp = Locale(language.languageCode, 'VN');
-          break;
-        case 'fr':
-          _temp = Locale(language.languageCode, 'FR');
-          break;
-        default:
-          _temp = Locale(language.languageCode, 'GB');
-      }
+    Future<void> _changeLanguage(Language language) async {
+      Locale _temp = await setLocale(language.languageCode);
 
       MyApp.setLocale(context, _temp);
     }

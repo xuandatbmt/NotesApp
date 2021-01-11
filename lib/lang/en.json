@@ -43,5 +43,27 @@
     "selected_status": "Selected Status",
     "selected_priority": "Selected Priority",
     "edit_note_screen": "Edit Note",
+<<<<<<< Updated upstream
     "hint_text_1": "Context" 
+=======
+    "hint_text_1": "Context",
+    "hint_text_category": "Category Name",
+    "hint_text_priority": "Priority Name",
+    "email": "Email",
+    "hint_text_email": "DisplayName",
+    "email_text": "Name",
+    "email_password": "Password",
+    "email_update": "UPDATE",
+    "hint_status": "Name Status",
+    "hint_priority": "Name Priority",
+    "hint_category": "Name Category",
+    "wrong": "Wrong",
+    "missing_data": "Missing Data?",
+    "confirm_delete": "Confirm Delete",
+    "delete_question": "Are you sure you want to delete?",
+    "btn_delete": "Delete",
+    "btn_cancel": "Cancel"
+
+
+>>>>>>> Stashed changes
 }

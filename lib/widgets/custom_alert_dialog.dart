@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/localization/localization_constants.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   @override
@@ -14,11 +15,11 @@ class CustomAlertDialog extends StatelessWidget {
     }
 
     return AlertDialog(
-      title: Text('Confirm delete'),
-      content: Text('Are you sure you want to delete?'),
+      title: Text(getTranslated(context, 'confirm_delete')),
+      content: Text(getTranslated(context, 'delete_question')),
       actions: <Widget>[
-        myFlatButton('Delete', Colors.redAccent, true),
-        myFlatButton('Cancel', Colors.grey, false),
+        myFlatButton(getTranslated(context, 'btn_delete'), Colors.redAccent, true),
+        myFlatButton(getTranslated(context, 'btn_cancel'), Colors.grey, false),
       ],
       contentPadding: EdgeInsets.fromLTRB(25, 15, 25, 5),
       insetPadding: EdgeInsets.symmetric(horizontal: 20),

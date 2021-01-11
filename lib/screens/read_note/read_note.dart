@@ -257,7 +257,7 @@ class _EditNoteState extends State<EditNote> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Selected Category'),
+            title: Text(getTranslated(context, 'selected_category')),
             content: setupAlertDialoadContainer(),
           );
         },
@@ -304,7 +304,7 @@ class _EditNoteState extends State<EditNote> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Selected Priority'),
+            title: Text(getTranslated(context, 'selected_priority')),
             content: containPriority(),
           );
         },
@@ -350,7 +350,7 @@ class _EditNoteState extends State<EditNote> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Selected Status'),
+            title: Text(getTranslated(context, 'selected_status')),
             content: contaninerStatus(),
           );
         },

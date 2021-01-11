@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/localization/localization_constants.dart';
 import 'package:notes/screens/add_note/components/text_field.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/widgets/custom_appbar.dart';
@@ -17,7 +18,7 @@ class AddPrioty extends StatelessWidget {
         child: Column(
           children: <Widget>[
             CustomAppBar(
-              title: 'Add Priority',
+              title: getTranslated(context, 'add_priority'),
               icon: FontAwesomeIcons.solidSave,
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
@@ -28,7 +29,7 @@ class AddPrioty extends StatelessWidget {
             ),
             AddingTextField(
               maxLines: 1,
-              hintText: 'Name Priority',
+              hintText: getTranslated(context, 'hint_priority'),
               onChanged: (value) {
                 _namePriority = value;
               },

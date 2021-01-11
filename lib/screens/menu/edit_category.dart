@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes/localization/localization_constants.dart';
 import 'package:notes/models/category_model.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/widgets/custom_appbar.dart';
@@ -78,7 +79,7 @@ class _EditCategorySState extends State<EditCategoryScreen> {
         child: Column(
           children: <Widget>[
             CustomAppBar(
-              title: 'Edit Category',
+              title: getTranslated(context, 'edit_category_screen'),
               icon: FontAwesomeIcons.solidSave,
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
@@ -95,7 +96,8 @@ class _EditCategorySState extends State<EditCategoryScreen> {
               child: TextField(
                 maxLines: 1,
                 autocorrect: false,
-                decoration: InputDecoration(hintText: "Category Name"),
+                decoration: InputDecoration(
+                    hintText: getTranslated(context, 'hint_text_category')),
                 controller: TextController(
                   text: this.category.categoryName,
                 ),

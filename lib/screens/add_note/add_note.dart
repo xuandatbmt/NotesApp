@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:notes/config/constants.dart';
+import 'package:notes/localization/localization_constants.dart';
 import 'package:notes/models/category_model.dart';
 import 'package:notes/models/notes_model.dart';
 import 'package:notes/models/priority_model.dart';
@@ -37,7 +38,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
         child: Column(
           children: <Widget>[
             CustomAppBar(
-                title: 'Add Note',
+                title: getTranslated(context, 'add_note'),
                 icon: FontAwesomeIcons.solidSave,
                 onPressed: () async {
                   Map<String, dynamic> params = Map<String, dynamic>();
@@ -58,8 +59,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                     data.update();
                   } else {
                     return AlertDialog(
-                      title: Text('Wrong'),
-                      content: Text('Missing data?'),
+                      title: Text(getTranslated(context, 'wrong')),
+                      content: Text(getTranslated(context, 'missing_data')),
                       actions: <Widget>[
                         myFlatButton('OK', Colors.grey, false),
                       ],
@@ -70,14 +71,14 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 }),
             AddingTextField(
                 maxLines: 1,
-                hintText: 'Title',
+                hintText: getTranslated(context, 'hint_title'),
                 onChanged: (value) {
                   _title = value;
                 }),
             Flexible(
                 child: AddingTextField(
                     maxLines: 50,
-                    hintText: 'Note',
+                    hintText: getTranslated(context, 'hint_text'),
                     onChanged: (value) {
                       _content = value;
                     })),
@@ -184,7 +185,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Selected Category'),
+            title: Text(getTranslated(context, 'selected_category')),
             content: setupAlertDialoadContainer(),
           );
         },
@@ -231,7 +232,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Selected Priority'),
+            title: Text(getTranslated(context, 'selected_priority')),
             content: containPriority(),
           );
         },
@@ -277,7 +278,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Selected Status'),
+            title: Text(getTranslated(context, 'selected_status')),
             content: contaninerStatus(),
           );
         },
