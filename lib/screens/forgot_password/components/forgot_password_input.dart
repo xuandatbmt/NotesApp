@@ -42,7 +42,7 @@ class _ForgotPassInputState extends State<ForgotPassInput> {
       throw (e);
     });
 
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 200) {
       showToast(jsonDecode(response.body)['message']);
       // setState(() {

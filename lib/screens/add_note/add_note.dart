@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:notes/models/category_model.dart';
 import 'package:notes/models/notes_model.dart';
@@ -46,25 +47,31 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   params["priority"] = _prioritySelected.toString();
                   params["status"] = _statusSelected.toString();
                   params["category"] = _categorySelected.toString();
-                  if (_title.isNotEmpty &&
-                      _content.isNotEmpty &&
-                      _categorySelected.isNotEmpty &&
-                      _statusSelected.isNotEmpty &&
-                      _prioritySelected.isNotEmpty &&
-                      _dateofTime.toString().isNotEmpty) {
+                  if (_title == null ||
+                      _content == null ||
+                      _categorySelected == null ||
+                      _statusSelected == null ||
+                      _prioritySelected == null ||
+                      _dateofTime == null) {
+                    Fluttertoast.showToast(
+                      msg: "please fill all in this form before save",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                    );
+                    // return AlertDialog(
+                    //   title: Text('Wrong'),
+                    //   content: Text('Data is not null'),
+                    //   actions: <Widget>[
+                    //     myFlatButton('OK', Colors.grey, false),
+                    //   ],
+                    //   contentPadding: EdgeInsets.fromLTRB(25, 15, 25, 5),
+                    //   insetPadding: EdgeInsets.symmetric(horizontal: 20),
+                    // );
+                  } else {
                     await data.addNote(http.Client(), params);
                     Navigator.pop(context);
                     data.update();
-                  } else {
-                    return AlertDialog(
-                      title: Text('Wrong'),
-                      content: Text('Data is not null'),
-                      actions: <Widget>[
-                        myFlatButton('OK', Colors.grey, false),
-                      ],
-                      contentPadding: EdgeInsets.fromLTRB(25, 15, 25, 5),
-                      insetPadding: EdgeInsets.symmetric(horizontal: 20),
-                    );
                   }
                 }),
             AddingTextField(
@@ -113,7 +120,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                         _dateofTime = _time.format(context) +
                             " " +
                             DateFormat("dd/MM/yyyy").format(_dateTime);
-                        print(_dateofTime);
+                        // print(_dateofTime);
                       },
                     ),
                     IconButton(
@@ -166,7 +173,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                             snapshot.data[index].categoryName;
                         Navigator.pop(context);
 
-                        print(_categorySelected);
+                        // print(_categorySelected);
                       },
                     );
                   });
@@ -213,7 +220,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                         this._prioritySelected =
                             snapshot.data[index].priorityName;
                         Navigator.pop(context);
-                        print(_prioritySelected);
+                        // print(_prioritySelected);
                       },
                     );
                   });
@@ -259,7 +266,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                       onTap: () {
                         this._statusSelected = snapshot.data[index].statusName;
                         Navigator.pop(context);
-                        print(_statusSelected);
+                        // print(_statusSelected);
                       },
                     );
                   });
