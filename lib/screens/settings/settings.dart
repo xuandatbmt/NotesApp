@@ -40,7 +40,7 @@ class SettingsScreen extends StatelessWidget {
                   SettingsListTile(
                     title: 'Night mode',
                     trailing: Transform.scale(
-                      scale: 0.7,
+                      scale: 0.85,
                       child: CupertinoSwitch(
                         value: data.isNight,
                         onChanged: (value) {
@@ -52,31 +52,40 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   SettingsListTile(
                       title: 'Languages',
-                      trailing: DropdownButton(
-                        underline: SizedBox(),
-                        icon: Icon(
-                          Icons.language,
-                          color: Colors.white,
-                        ),
-                        items: getLanguages.map((Language lang) {
-                          return new DropdownMenuItem<String>(
-                            value: lang.languageCode,
-                            child: new Text(lang.name),
-                          );
-                        }).toList(),
-                        onChanged: (val) {
-                          print(val);
-                        },
-                      )),
+                      trailing: Transform.scale(
+                          scale: 0.95,
+                          child: DropdownButton(
+                            underline: SizedBox(),
+                            icon: Icon(
+                              Icons.language,
+                              size: 42,
+                              // color: Colors.white,
+                            ),
+                            items: getLanguages.map((Language lang) {
+                              return new DropdownMenuItem<String>(
+                                value: lang.languageCode,
+                                child: new Text(lang.name),
+                              );
+                            }).toList(),
+                            onChanged: (val) {
+                              print(val);
+                            },
+                          ))),
+                     
                   SettingsListTile(
                     title: 'Source code',
-                    trailing: IconButton(
-                      icon: Icon(FontAwesomeIcons.github,
-                          color: Theme.of(context).primaryIconTheme.color,
-                          size: 25),
-                      onPressed: _launchURL,
+                    trailing: Transform.scale(
+                      scale: 0.8,
+                      child: IconButton(
+                        icon: Icon(
+                          FontAwesomeIcons.githubAlt,
+                            color: Theme.of(context).primaryIconTheme.color,
+                            size: 40
+                            ),
+                        onPressed: _launchURL,
+                      ),
                     ),
-                  ),
+                  )
                 ],
               ),
             )

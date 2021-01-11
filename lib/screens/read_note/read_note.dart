@@ -113,7 +113,7 @@ class _EditNoteState extends State<EditNote> {
                 params["status"] = _statusSelected.toString();
                 params["update_at"] = DateTime.now().toString();
                 params["category"] = _categorySelected.toString();
-                if (notes.title != '' && notes.body != '') {
+                if (notes.title != null && notes.body != null) {
                   await data.updateNote(http.Client(), params);
                   Navigator.pop(context);
                   data.update();
@@ -186,7 +186,7 @@ class _EditNoteState extends State<EditNote> {
                         _dateofTime = _time.format(context) +
                             " " +
                             DateFormat("dd/MM/yyyy").format(_dateTime);
-                        print(_dateofTime);
+                        // print(_dateofTime);
                       },
                     ),
                     IconButton(
@@ -237,7 +237,7 @@ class _EditNoteState extends State<EditNote> {
                             snapshot.data[index].categoryName;
                         Navigator.pop(context);
 
-                        print(_categorySelected);
+                        // print(_categorySelected);
                       },
                     );
                   });
@@ -284,7 +284,7 @@ class _EditNoteState extends State<EditNote> {
                         this._prioritySelected =
                             snapshot.data[index].priorityName;
                         Navigator.pop(context);
-                        print(_prioritySelected);
+                        // print(_prioritySelected);
                       },
                     );
                   });
@@ -330,7 +330,7 @@ class _EditNoteState extends State<EditNote> {
                       onTap: () {
                         this._statusSelected = snapshot.data[index].statusName;
                         Navigator.pop(context);
-                        print(_statusSelected);
+                        // print(_statusSelected);
                       },
                     );
                   });

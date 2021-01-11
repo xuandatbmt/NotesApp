@@ -154,10 +154,10 @@ class _UserProfilePage extends State<UserProfile> {
                               params["displayName"] =
                                   this.profileModel.displayName.toString();
                               this.profileModel.toString();
-                              if (_newPassWord != '') {
+                              if (_newPassWord != null) {
                                 params["password"] = _newPassWord.toString();
                               }
-                              if (profileModel.displayName != '') {
+                              if (profileModel.displayName != null) {
                                 await data.updateProfile(http.Client(), params);
                                 Navigator.pop(context);
                               }

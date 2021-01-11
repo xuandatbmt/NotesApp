@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         leading: FlatButton(
             onPressed: () {
-              print("click menu");
+              // print("click menu");
               _scaffoldKey.currentState.openDrawer();
             },
             child: Icon(Icons.menu)),
