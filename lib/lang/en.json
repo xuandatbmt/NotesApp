@@ -41,5 +41,7 @@
     "hint_text": "Note",
     "selected_category": "Selected Category",
     "selected_status": "Selected Status",
-    "selected_priority": "Selected Priority"   
+    "selected_priority": "Selected Priority",
+    "edit_note_screen": "Edit Note",
+    "hint_text_1": "Context" 
 }

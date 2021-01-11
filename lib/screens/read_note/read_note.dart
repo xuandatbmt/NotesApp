@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:notes/localization/localization_constants.dart';
 import 'package:notes/models/category_model.dart';
 import 'package:notes/models/notes_model.dart';
 import 'package:notes/models/priority_model.dart';
@@ -100,7 +101,7 @@ class _EditNoteState extends State<EditNote> {
         child: Column(
           children: <Widget>[
             CustomAppBar(
-              title: 'Edit Note',
+              title: getTranslated(context, 'edit_note_screen'),
               icon: FontAwesomeIcons.solidSave,
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
@@ -125,7 +126,8 @@ class _EditNoteState extends State<EditNote> {
               child: TextField(
                 maxLines: 1,
                 autocorrect: false,
-                decoration: InputDecoration(hintText: "Title"),
+                decoration: InputDecoration(
+                    hintText: getTranslated(context, 'hint_title')),
                 controller: TextController(
                   text: this.notes.title,
                 ),
@@ -143,7 +145,8 @@ class _EditNoteState extends State<EditNote> {
                 child: TextField(
                   maxLines: 50,
                   autocorrect: false,
-                  decoration: InputDecoration(hintText: "Content"),
+                  decoration: InputDecoration(
+                      hintText: getTranslated(context, 'hint_text_1')),
                   controller: TextController(text: this.notes.body),
                   onChanged: (text) {
                     setState(() {

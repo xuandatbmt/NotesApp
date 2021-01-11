@@ -41,5 +41,7 @@
     "hint_text": "Ghi chú",
     "selected_category": "Chọn thể loại",
     "selected_status": "Chọn trạng thái",
-    "selected_priority": "Chọn độ ưu tiên"   
+    "selected_priority": "Chọn độ ưu tiên",
+    "edit_note_screen": "Chỉnh sửa ghi chú",
+    "hint_text_1": "Văn bản"   
 }
