@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SpeedDialChild(
             child: Icon(Icons.create_sharp),
-            label: "Add Prioty",
+            label: "Add Priority",
             backgroundColor: Colors.blue,
             onTap: () {
               Navigator.push(
