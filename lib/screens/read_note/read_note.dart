@@ -113,7 +113,7 @@ class _EditNoteState extends State<EditNote> {
                 params["status"] = _statusSelected.toString();
                 params["update_at"] = DateTime.now().toString();
                 params["category"] = _categorySelected.toString();
-                if (notes.title != '' && notes.body != '') {
+                if (notes.title != null && notes.body != null) {
                   await data.updateNote(http.Client(), params);
                   Navigator.pop(context);
                   data.update();

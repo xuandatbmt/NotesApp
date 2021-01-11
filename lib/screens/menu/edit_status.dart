@@ -83,7 +83,7 @@ class _EditStatusSState extends State<EditStatusScreen> {
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
                 params["status_name"] = this.status.statusName.toString();
-                if (status.statusName != '') {
+                if (status.statusName != null) {
                   await data.updateStatus(http.Client(), params);
                   Navigator.pop(context);
                   data.update();

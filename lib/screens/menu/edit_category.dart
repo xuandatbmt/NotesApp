@@ -83,7 +83,7 @@ class _EditCategorySState extends State<EditCategoryScreen> {
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
                 params["category_name"] = this.category.categoryName.toString();
-                if (category.categoryName != '') {
+                if (category.categoryName != null) {
                   await data.updateCategory(http.Client(), params);
                   Navigator.pop(context);
                   data.update();

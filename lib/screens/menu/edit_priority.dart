@@ -83,7 +83,7 @@ class _EditPrioritySState extends State<EditPriorityScreen> {
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
                 params["priority_name"] = this.priority.priorityName.toString();
-                if (priority.priorityName != '') {
+                if (priority.priorityName != null) {
                   await data.updatePriority(http.Client(), params);
                   Navigator.pop(context);
                   data.update();
