@@ -46,19 +46,19 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   params["priority"] = _prioritySelected.toString();
                   params["status"] = _statusSelected.toString();
                   params["category"] = _categorySelected.toString();
-                  if (_title != '' &&
-                      _content != '' &&
-                      _categorySelected != '' &&
-                      _statusSelected != '' &&
-                      _prioritySelected != '' &&
-                      _dateofTime != '') {
+                  if (_title.isNotEmpty &&
+                      _content.isNotEmpty &&
+                      _categorySelected.isNotEmpty &&
+                      _statusSelected.isNotEmpty &&
+                      _prioritySelected.isNotEmpty &&
+                      _dateofTime.toString().isNotEmpty) {
                     await data.addNote(http.Client(), params);
                     Navigator.pop(context);
                     data.update();
                   } else {
                     return AlertDialog(
                       title: Text('Wrong'),
-                      content: Text('Missing data?'),
+                      content: Text('Data is not null'),
                       actions: <Widget>[
                         myFlatButton('OK', Colors.grey, false),
                       ],

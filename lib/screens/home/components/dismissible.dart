@@ -89,7 +89,7 @@ class CustomDismissible extends StatelessWidget {
       ),
       onDismissed: (direction) async {
         await data.deleteNote(http.Client(), this.notes[index].id);
-        data.update();
+        // data.update();
       },
       confirmDismiss: (direction) => showDialog(
           context: context, builder: (context) => CustomAlertDialog()),
