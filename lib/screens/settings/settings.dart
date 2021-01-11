@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes/localization/localization_constants.dart';
+import 'package:notes/main.dart';
 import 'package:notes/models/lang.dart';
 import 'package:notes/services/shared_pref.dart';
 import 'package:notes/widgets/custom_appbar.dart';
@@ -21,6 +23,25 @@ class SettingsScreen extends StatelessWidget {
         return;
     }
 
+    void _changeLanguage(Language language) {
+      Locale _temp;
+      switch (language.languageCode) {
+        case 'en':
+          _temp = Locale(language.languageCode, 'GB');
+          break;
+        case 'vi':
+          _temp = Locale(language.languageCode, 'VN');
+          break;
+        case 'fr':
+          _temp = Locale(language.languageCode, 'FR');
+          break;
+        default:
+          _temp = Locale(language.languageCode, 'GB');
+      }
+
+      MyApp.setLocale(context, _temp);
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -29,7 +50,7 @@ class SettingsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 45),
               child: CustomAppBar(
-                title: 'Settings',
+                title: getTranslated(context, 'settings_screen'),
                 isVisible: false,
               ),
             ),
@@ -38,7 +59,7 @@ class SettingsScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   SettingsListTile(
-                    title: 'Night mode',
+                    title: getTranslated(context, 'night_mode'),
                     trailing: Transform.scale(
                       scale: 0.7,
                       child: CupertinoSwitch(
@@ -51,25 +72,33 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                   SettingsListTile(
-                      title: 'Languages',
+                      title: getTranslated(context, 'languages'),
                       trailing: DropdownButton(
                         underline: SizedBox(),
                         icon: Icon(
                           Icons.language,
-                          color: Colors.white,
+                          // color: Colors.white,
                         ),
-                        items: getLanguages.map((Language lang) {
-                          return new DropdownMenuItem<String>(
-                            value: lang.languageCode,
-                            child: new Text(lang.name),
-                          );
-                        }).toList(),
-                        onChanged: (val) {
-                          print(val);
+                        items: Language.languageList()
+                            .map<DropdownMenuItem<Language>>(
+                                (lang) => DropdownMenuItem(
+                                      value: lang,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: <Widget>[
+                                          Text(lang.flag),
+                                          Text(lang.name)
+                                        ],
+                                      ),
+                                    ))
+                            .toList(),
+                        onChanged: (Language language) {
+                          _changeLanguage(language);
                         },
                       )),
                   SettingsListTile(
-                    title: 'Source code',
+                    title: getTranslated(context, 'source_code'),
                     trailing: IconButton(
                       icon: Icon(FontAwesomeIcons.github,
                           color: Theme.of(context).primaryIconTheme.color,

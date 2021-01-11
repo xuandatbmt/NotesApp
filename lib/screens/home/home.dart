@@ -12,6 +12,8 @@ import 'package:notes/themes/colors.dart';
 import 'components/list_view.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:notes/localization/demo_localization.dart';
+import 'package:notes/localization/localization_constants.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -31,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         brightness: theme.isNight ? Brightness.dark : Brightness.light,
         elevation: 0.0,
         title: Text(
-          "Notes Manager",
+          getTranslated(context, 'home_screen'),
           textAlign: TextAlign.right,
           style: TextStyle(fontSize: 18, color: fabSplashColor),
         ),
@@ -84,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           SpeedDialChild(
             child: Icon(Icons.event),
-            label: "Add Note",
+            label: getTranslated(context, 'add_note'),
             backgroundColor: Colors.orange,
             onTap: () {
               Navigator.push(
@@ -95,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SpeedDialChild(
             child: Icon(Icons.create_new_folder),
-            label: "Add Category",
+            label: getTranslated(context, 'add_category'),
             backgroundColor: Colors.red,
             onTap: () {
               // newCategory = Category('Not Specified');
@@ -107,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SpeedDialChild(
             child: Icon(Icons.create_sharp),
-            label: "Add Prioty",
+            label: getTranslated(context, 'add_priority'),
             backgroundColor: Colors.blue,
             onTap: () {
               Navigator.push(
@@ -118,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SpeedDialChild(
             child: Icon(Icons.done_all),
-            label: "Add Status",
+            label: getTranslated(context, 'add_status'),
             backgroundColor: Colors.green,
             onTap: () {
               Navigator.push(
