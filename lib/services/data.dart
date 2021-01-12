@@ -420,7 +420,7 @@ class Data extends ChangeNotifier {
   Future<Category> updateCategory(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final response = await client.put(URL_API + '/categori/${params["id"]}',
+    final response = await client.put(URL_API + '/category/${params["id"]}',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
