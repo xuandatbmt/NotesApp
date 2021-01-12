@@ -6,7 +6,7 @@ import 'package:notes/services/shared_pref.dart';
 import 'package:provider/provider.dart';
 import 'themes/dark_theme.dart';
 import 'themes/light_theme.dart';
-
+//test
 Future main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();

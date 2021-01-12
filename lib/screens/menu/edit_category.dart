@@ -82,6 +82,7 @@ class _EditCategorySState extends State<EditCategoryScreen> {
               icon: FontAwesomeIcons.solidSave,
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
+                params["id"] = this.category.id;
                 params["category_name"] = this.category.categoryName.toString();
                 if (category.categoryName != null) {
                   await data.updateCategory(http.Client(), params);

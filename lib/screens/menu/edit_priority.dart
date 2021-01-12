@@ -82,6 +82,7 @@ class _EditPrioritySState extends State<EditPriorityScreen> {
               icon: FontAwesomeIcons.solidSave,
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
+                params["id"] = this.priority.id;
                 params["priority_name"] = this.priority.priorityName.toString();
                 if (priority.priorityName != null) {
                   await data.updatePriority(http.Client(), params);

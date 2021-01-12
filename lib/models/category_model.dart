@@ -21,7 +21,7 @@ class Category {
   String uid;
   String categoryName;
   factory Category.fromCateList(Category list) =>
-      Category(categoryName: list.categoryName);
+      Category(id: list.id, categoryName: list.categoryName);
   factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
         uid: json["uid"],

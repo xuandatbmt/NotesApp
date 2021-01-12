@@ -386,7 +386,7 @@ class Data extends ChangeNotifier {
   Future<Status> updateStatus(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final response = await client.put(URL_API + '/note/${params["id"]}',
+    final response = await client.put(URL_API + '/status/${params["id"]}',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
@@ -396,14 +396,14 @@ class Data extends ChangeNotifier {
       final responseBody = await json.decode(response.body);
       return Status.fromJson(responseBody);
     } else {
-      throw Exception('Fail to update Notes ');
+      throw Exception('Fail');
     }
   }
 
   Future<Priority> updatePriority(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final response = await client.put(URL_API + '/note/${params["id"]}',
+    final response = await client.put(URL_API + '/priority/${params["id"]}',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
@@ -413,14 +413,14 @@ class Data extends ChangeNotifier {
       final responseBody = await json.decode(response.body);
       return Priority.fromJson(responseBody);
     } else {
-      throw Exception('Fail to update Notes ');
+      throw Exception('Fail');
     }
   }
 
   Future<Category> updateCategory(
       http.Client client, Map<String, dynamic> params) async {
     String token = await Data().getToken();
-    final response = await client.put(URL_API + '/note/${params["id"]}',
+    final response = await client.put(URL_API + '/categori/${params["id"]}',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
@@ -430,7 +430,7 @@ class Data extends ChangeNotifier {
       final responseBody = await json.decode(response.body);
       return Category.fromJson(responseBody);
     } else {
-      throw Exception('Fail to update Notes ');
+      throw Exception('Fail');
     }
   }
 

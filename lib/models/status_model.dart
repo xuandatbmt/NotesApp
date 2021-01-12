@@ -21,7 +21,7 @@ class Status {
   String uid;
   String statusName;
   factory Status.fromStatusList(Status list) =>
-      Status(statusName: list.statusName);
+      Status(id: list.id, statusName: list.statusName);
   factory Status.fromJson(Map<String, dynamic> json) => Status(
         id: json["id"],
         uid: json["uid"],

@@ -82,6 +82,7 @@ class _EditStatusSState extends State<EditStatusScreen> {
               icon: FontAwesomeIcons.solidSave,
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
+                params["id"] = this.status.id;
                 params["status_name"] = this.status.statusName.toString();
                 if (status.statusName != null) {
                   await data.updateStatus(http.Client(), params);

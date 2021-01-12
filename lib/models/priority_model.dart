@@ -21,7 +21,7 @@ class Priority {
   String uid;
   String priorityName;
   factory Priority.fromPriorityList(Priority list) =>
-      Priority(priorityName: list.priorityName);
+      Priority(id: list.id, priorityName: list.priorityName);
   factory Priority.fromJson(Map<String, dynamic> json) => Priority(
         id: json["id"],
         uid: json["uid"],
