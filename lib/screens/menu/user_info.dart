@@ -93,7 +93,7 @@ class _UserProfilePage extends State<UserProfile> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  height: 450,
+                  height: 430,
                   width: double.infinity,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
@@ -118,7 +118,9 @@ class _UserProfilePage extends State<UserProfile> {
                           decoration: InputDecoration(
                               hintText: "DisplayName", labelText: "Name"),
                           controller: TextController(
-                              text: this.profileModel.displayName),
+                              text: this.profileModel.displayName == null
+                                  ? ''
+                                  : this.profileModel.displayName),
                           onChanged: (text) {
                             setState(() {
                               this.profileModel.displayName = text;
