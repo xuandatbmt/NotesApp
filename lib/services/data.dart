@@ -391,7 +391,7 @@ class Data extends ChangeNotifier {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
-        body: params);
+        body: jsonEncode(params));
     if (response.statusCode == 200) {
       final responseBody = await json.decode(response.body);
       return Status.fromJson(responseBody);
@@ -408,7 +408,7 @@ class Data extends ChangeNotifier {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
-        body: params);
+        body: jsonEncode(params));
     if (response.statusCode == 200) {
       final responseBody = await json.decode(response.body);
       return Priority.fromJson(responseBody);
@@ -425,7 +425,7 @@ class Data extends ChangeNotifier {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
-        body: params);
+        body: jsonEncode(params));
     if (response.statusCode == 200) {
       final responseBody = await json.decode(response.body);
       return Category.fromJson(responseBody);
