@@ -104,7 +104,6 @@ class _EditNoteState extends State<EditNote> {
               icon: FontAwesomeIcons.solidSave,
               onPressed: () async {
                 Map<String, dynamic> params = Map<String, dynamic>();
-
                 params["id"] = this.notes.id;
                 params["title"] = this.notes.title.toString();
                 params["body"] = this.notes.body.toString();
