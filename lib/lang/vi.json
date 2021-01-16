@@ -43,5 +43,21 @@
     "selected_status": "Chọn trạng thái",
     "selected_priority": "Chọn độ ưu tiên",
     "edit_note_screen": "Chỉnh sửa ghi chú",
-    "hint_text_1": "Văn bản"   
+    "hint_text_1": "Văn bản",
+    "hint_text_category": "Tên thể loại",
+    "hint_text_priority": "Tên độ ưu tiên",
+    "email": "Email",
+    "hint_text_email": "Tên hiển thị",
+    "email_text": "Tên",
+    "email_password": "Mật khẩu",
+    "email_update": "CẬP NHẬT",
+    "hint_status": "Tên trạng thái",
+    "hint_priority": "Tên độ ưu tiên",
+    "hint_category": "Tên thể loại",
+    "wrong": "Sai",
+    "missing_data": "Mất dữ liệu?",
+    "confirm_delete": "Xác nhận Xóa",
+    "delete_question": "Bạn có muốn xóa dữ liệu?",
+    "btn_delete": "Xóa",
+    "btn_cancel": "Hủy" 
 }
