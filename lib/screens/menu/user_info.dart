@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/localization/localization_constants.dart';
 import 'package:notes/models/profile.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/services/shared_pref.dart';
@@ -76,7 +77,11 @@ class _UserProfilePage extends State<UserProfile> {
       appBar: AppBar(
         brightness: theme.isNight ? Brightness.dark : Brightness.light,
         elevation: 0.0,
-        title: Text('User Profile', style: TextStyle(color: fabSplashColor)),
+        // title: Text('User Profile', style: TextStyle(color: fabSplashColor)),
+
+        title: Text(getTranslated(context, 'user_profile'),
+            style: TextStyle(color: fabSplashColor)),
+
         backgroundColor: Colors.white10,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),

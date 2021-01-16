@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/localization/localization_constants.dart';
 import 'package:notes/screens/menu/components/listview_p.dart';
 
 import 'package:notes/services/data.dart';
@@ -23,7 +24,7 @@ class _PriotyScreenState extends State<PriotyScreen> {
         backgroundColor: Colors.white10,
         elevation: 0.0,
         title: Text(
-          "List Priority",
+          getTranslated(context, 'priority_screen'),
           textAlign: TextAlign.right,
           style: TextStyle(color: fabSplashColor),
         ),

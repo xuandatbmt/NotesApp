@@ -1,3 +1,4 @@
+import 'package:notes/localization/localization_constants.dart';
 import 'package:notes/services/shared_pref.dart';
 import 'package:notes/themes/colors.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -26,7 +27,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
         backgroundColor: Colors.white10,
         elevation: 0.0,
         title: Text(
-          "Statistics",
+          getTranslated(context, 'statistics'),
           textAlign: TextAlign.right,
           style: TextStyle(color: fabSplashColor),
         ),

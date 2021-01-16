@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:notes/localization/localization_constants.dart';
 import 'package:notes/models/category_model.dart';
 import 'package:notes/models/notes_model.dart';
 import 'package:notes/models/priority_model.dart';
@@ -253,7 +254,7 @@ class _EditNoteState extends State<EditNote> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Selected Category'),
+            title: Text(getTranslated(context, 'selected_priority')),
             content: setupAlertDialoadContainer(),
           );
         },
@@ -300,7 +301,7 @@ class _EditNoteState extends State<EditNote> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Selected Priority'),
+            title: Text(getTranslated(context, 'selected_priority')),
             content: containPriority(),
           );
         },
@@ -346,7 +347,7 @@ class _EditNoteState extends State<EditNote> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Selected Status'),
+            title: Text(getTranslated(context, 'selected_status')),
             content: contaninerStatus(),
           );
         },
