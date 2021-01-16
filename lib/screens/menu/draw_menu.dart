@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/localization/localization_constants.dart';
 import 'package:notes/models/profile.dart';
 import 'package:notes/screens/login/login.dart';
 import 'package:notes/screens/menu/about.dart';
@@ -80,7 +81,7 @@ class _OptionMenuState extends State<OptionMenu> {
                       margin: EdgeInsets.only(top: 30),
                       child: ListTile(
                         title: Text(
-                          "User Profile",
+                          getTranslated(context, 'user_profile'),
                           textAlign: TextAlign.left,
                           style: TextStyle(fontSize: 18),
                         ),
@@ -95,7 +96,7 @@ class _OptionMenuState extends State<OptionMenu> {
             ListTile(
               leading: Icon(Icons.settings),
               title: Text(
-                'Setting',
+                getTranslated(context, 'setting'),
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
@@ -111,7 +112,7 @@ class _OptionMenuState extends State<OptionMenu> {
             ListTile(
               leading: Icon(Icons.category),
               title: Text(
-                'Category',
+                getTranslated(context, 'category'),
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
@@ -126,7 +127,7 @@ class _OptionMenuState extends State<OptionMenu> {
             ListTile(
               leading: Icon(Icons.circle_notifications),
               title: Text(
-                'Status',
+                getTranslated(context, 'status'),
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
@@ -141,7 +142,7 @@ class _OptionMenuState extends State<OptionMenu> {
             ListTile(
               leading: Icon(Icons.low_priority),
               title: Text(
-                'Priority',
+                getTranslated(context, 'priority'),
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
@@ -156,7 +157,7 @@ class _OptionMenuState extends State<OptionMenu> {
             ListTile(
               leading: Icon(Icons.bar_chart),
               title: Text(
-                'Statistics',
+                getTranslated(context, 'statistics'),
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
@@ -172,7 +173,7 @@ class _OptionMenuState extends State<OptionMenu> {
             ListTile(
               leading: Icon(Icons.mail),
               title: Text(
-                'Support Us',
+                getTranslated(context, 'support_us'),
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {},
@@ -180,7 +181,7 @@ class _OptionMenuState extends State<OptionMenu> {
             ListTile(
               leading: Icon(Icons.star),
               title: Text(
-                'Rate and Review',
+                getTranslated(context, 'rate_and_review'),
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
@@ -196,7 +197,7 @@ class _OptionMenuState extends State<OptionMenu> {
             ListTile(
               leading: Icon(Icons.info),
               title: Text(
-                'About',
+                getTranslated(context, 'about_us'),
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {
@@ -212,7 +213,7 @@ class _OptionMenuState extends State<OptionMenu> {
             ListTile(
               leading: Icon(Icons.logout),
               title: Text(
-                'Logout',
+                getTranslated(context, 'logout'),
                 style: TextStyle(fontSize: 18),
               ),
               onTap: () {

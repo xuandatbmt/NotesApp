@@ -43,5 +43,21 @@
     "selected_status": "Statut sélectionné",
     "selected_priority": "Priorité sélectionnée",
     "edit_note_screen": "Note éditée",
-    "hint_text_1": "Le contexte"  
+    "hint_text_1": "Le contexte",
+    "hint_text_category": "Nom de catégorie",
+    "hint_text_priority": "Nom de la priorité",
+    "email": "Email",
+    "hint_text_email": "Afficher un nom",
+    "email_text": "Nom",
+    "email_password": "Mot de passe",
+    "email_update": "METTRE À JOUR",
+    "hint_status": "Statut du nom",
+    "hint_priority": "Nom de la priorité",
+    "hint_category": "Nom de catégorie",
+    "wrong": "Faux",
+    "missing_data": "Données manquantes?",
+    "confirm_delete": "Confirmation de la suppression",
+    "delete_question": "Etes-vous sûr que vous voulez supprimer?",
+    "btn_delete": "Supprimez",
+    "btn_cancel": "Annuler" 
 }

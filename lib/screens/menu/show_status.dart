@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/localization/localization_constants.dart';
 import 'package:notes/services/data.dart';
 import 'package:notes/services/shared_pref.dart';
 import 'package:notes/themes/colors.dart';
@@ -23,7 +24,7 @@ class _StatusScreenState extends State<StatusScreen> {
         backgroundColor: Colors.white10,
         elevation: 0.0,
         title: Text(
-          "List Status",
+          getTranslated(context, 'status_screen'),
           textAlign: TextAlign.right,
           style: TextStyle(color: fabSplashColor),
         ),

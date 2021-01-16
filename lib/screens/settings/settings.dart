@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes/localization/localization_constants.dart';
+import 'package:notes/main.dart';
 import 'package:notes/models/lang.dart';
 import 'package:notes/services/shared_pref.dart';
 import 'package:notes/widgets/custom_appbar.dart';
@@ -21,6 +23,12 @@ class SettingsScreen extends StatelessWidget {
         return;
     }
 
+    Future<void> _changeLanguage(Language language) async {
+      Locale _temp = await setLocale(language.languageCode);
+
+      MyApp.setLocale(context, _temp);
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -29,7 +37,7 @@ class SettingsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 45),
               child: CustomAppBar(
-                title: 'Settings',
+                title: getTranslated(context, 'settings_screen'),
                 isVisible: false,
               ),
             ),
@@ -38,7 +46,7 @@ class SettingsScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   SettingsListTile(
-                    title: 'Night mode',
+                    title: getTranslated(context, 'night_mode'),
                     trailing: Transform.scale(
                       scale: 0.85,
                       child: CupertinoSwitch(
@@ -51,7 +59,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                   SettingsListTile(
-                      title: 'Languages',
+                      title: getTranslated(context, 'languages'),
                       trailing: Transform.scale(
                           scale: 0.95,
                           child: DropdownButton(
@@ -61,27 +69,32 @@ class SettingsScreen extends StatelessWidget {
                               size: 42,
                               // color: Colors.white,
                             ),
-                            items: getLanguages.map((Language lang) {
-                              return new DropdownMenuItem<String>(
-                                value: lang.languageCode,
-                                child: new Text(lang.name),
-                              );
-                            }).toList(),
-                            onChanged: (val) {
-                              print(val);
+                            items: Language.languageList()
+                                .map<DropdownMenuItem<Language>>(
+                                    (lang) => DropdownMenuItem(
+                                          value: lang,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: <Widget>[
+                                              Text(lang.flag),
+                                              Text(lang.name)
+                                            ],
+                                          ),
+                                        ))
+                                .toList(),
+                            onChanged: (Language language) {
+                              _changeLanguage(language);
                             },
                           ))),
-                     
                   SettingsListTile(
-                    title: 'Source code',
+                    title: getTranslated(context, 'source_code'),
                     trailing: Transform.scale(
                       scale: 0.8,
                       child: IconButton(
-                        icon: Icon(
-                          FontAwesomeIcons.githubAlt,
+                        icon: Icon(FontAwesomeIcons.githubAlt,
                             color: Theme.of(context).primaryIconTheme.color,
-                            size: 40
-                            ),
+                            size: 40),
                         onPressed: _launchURL,
                       ),
                     ),
